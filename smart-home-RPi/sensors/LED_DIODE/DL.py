@@ -1,13 +1,17 @@
-import RPi.GPIO as GPIO
+
 import time
 
+try:
+    import RPi.GPIO as GPIO
+except:
+    pass
 
 class DL(object):
     def __init__(self, pin):
         self.pin = pin
         self.state = False  # Initialize the state as off
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(pin, GPIO.OUT)
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setup(pin, GPIO.OUT)
 
     def toggle(self):
         self.state = not self.state  # Toggle the state
@@ -23,11 +27,11 @@ class DL(object):
             self.state = False
 
 
-def run_dl_loop(button_pin, dl, callback, stop_event, print_lock, dl_name):
+def run_dl_loop(button_pin, dl_pin, callback, stop_event, print_lock, dl_name):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+    dl = DL(dl_pin)
     def button_callback(channel):
         dl.toggle()  # Toggle the door light
         if dl.state:
