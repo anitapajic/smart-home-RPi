@@ -1,8 +1,12 @@
 
 import threading
 from settings import load_settings
-from components.dht import run_dht
+from components.DHT.dht import run_dht1, run_dht2
 import time
+from threading import Lock
+
+print_lock = Lock()
+
 
 try:
     import RPi.GPIO as GPIO
@@ -18,7 +22,9 @@ if __name__ == "__main__":
     stop_event = threading.Event()
     try:
         dht1_settings = settings['DHT1']
-        run_dht(dht1_settings, threads, stop_event)
+        run_dht1(dht1_settings, threads, stop_event, print_lock)
+        dht2_settings = settings['DHT2']
+        run_dht2(dht2_settings, threads, stop_event, print_lock)
         while True:
             time.sleep(1)
 
