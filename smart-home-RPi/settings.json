@@ -8,5 +8,17 @@
         "simulated": true,
         "pin": 18,
         "name": "RDHT2"
+    },
+    "DL": {
+        "simulated": true,
+        "pin": 20,
+        "button_pin": 1,
+        "name": "DL"
+    },
+    "DL_BUTTON": {
+        "simulated": true,
+        "pin": 1,
+        "dl_pin": 20,
+        "name": "DL_BUTTON"
     }
 }
