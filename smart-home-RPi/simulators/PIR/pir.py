@@ -16,7 +16,7 @@ def simulated_no_motion(name, print_lock):
         print("------------------------------------")
 
 
-def simulated_pir(name, print_lock):
+def simulated_pir(name, print_lock, stop_event):
     try:
         while True:
             if random.randint(-1, 1) > 0:
@@ -24,6 +24,8 @@ def simulated_pir(name, print_lock):
             else:
                 simulated_no_motion(name, print_lock)
             time.sleep(2)
+            if stop_event.is_set():
+                break
 
     except KeyboardInterrupt:
         print("\nSimulated PIR sensor stopped!")

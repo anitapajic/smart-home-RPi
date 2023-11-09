@@ -7,7 +7,7 @@ def run_RPIR1(settings, threads, stop_event, print_lock):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
@@ -23,7 +23,7 @@ def run_RPIR2(settings, threads, stop_event, print_lock):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
@@ -38,7 +38,7 @@ def run_DPIR1(settings, threads, stop_event, print_lock):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
@@ -53,7 +53,7 @@ def run_DS1(settings, threads, stop_event, print_lock):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
