@@ -3,6 +3,8 @@ import threading
 from settings import load_settings
 from components.DHT.dht import run_dht1, run_dht2
 from components.LED_DIODE.led_diode import run_dl
+from components.UDS.uds import run_dus1
+import time
 from threading import Lock
 from components.BUZZ.buzz import run_db1
 from simulators.BUZZ.buzz import listen_for_keypress
@@ -62,7 +64,8 @@ def handle_choice(choice):
         dl_settings = settings['DL']
         run_dl(dl_settings, threads, stop_event, print_lock)
     elif choice == '5':
-        print("Not yet implemented..")
+        dus1_settings = settings['DUS1']
+        run_dus1(dus1_settings, threads, stop_event, print_lock)
     elif choice == '6':
         dms1_settings = settings['DMS1']
         run_keypad(dms1_settings, threads, stop_event, print_lock)

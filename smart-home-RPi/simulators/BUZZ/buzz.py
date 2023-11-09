@@ -23,3 +23,4 @@ def listen_for_keypress(stop_event, print_lock, key='x'):
         except Exception as e:
             with print_lock:
                 print(f"An error occurred: {e}")
+                break
