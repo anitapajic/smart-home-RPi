@@ -25,5 +25,8 @@
         "simulated": true,
         "pin": 16,
         "name": "DB1"
+    },
+    "DMS1" : {
+        "simulated" : true
     }
 }

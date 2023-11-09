@@ -3,10 +3,10 @@ import threading
 from settings import load_settings
 from components.DHT.dht import run_dht1, run_dht2
 from components.LED_DIODE.led_diode import run_dl
-import time
 from threading import Lock
 from components.BUZZ.buzz import run_db1
-from simulators.BUZZ.buzz import listen_for_keypress, simulated_buzz
+from simulators.BUZZ.buzz import listen_for_keypress
+from components.MS.ms import run_keypad
 
 print_lock = Lock()
 
@@ -65,7 +65,8 @@ def handle_choice(choice):
     elif choice == '7':
         print("Not yet implemented..")
     elif choice == '8':
-        print("Not yet implemented..")
+        dms1_settings = settings['DMS1']
+        run_keypad(dms1_settings, threads, stop_event, print_lock)
     else:
         print("Invalid choice. Please try again.")
     for thread in threads:
