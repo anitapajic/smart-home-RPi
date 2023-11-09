@@ -1,4 +1,3 @@
-
 import time
 
 try:
@@ -10,18 +9,23 @@ class DL(object):
     def __init__(self, pin):
         self.pin = pin
         self.state = False  # Initialize the state as off
-        # GPIO.setmode(GPIO.BCM)
-        # GPIO.setup(pin, GPIO.OUT)
+
 
     def toggle(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
         self.state = not self.state  # Toggle the state
 
     def turnOn(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
         if not self.state:
             GPIO.output(self.pin, GPIO.HIGH)
             self.state = True
 
     def turnOff(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
         if self.state:
             GPIO.output(self.pin, GPIO.LOW)
             self.state = False

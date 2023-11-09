@@ -26,6 +26,12 @@
         "pin": 16,
         "name": "DB1"
     },
+    "DUS1": {
+        "simulated": true,
+        "trig_pin": 33,
+        "echo_pin": 34,
+        "name": "DUS1"
+    },
     "DMS1" : {
         "simulated" : true
     }
