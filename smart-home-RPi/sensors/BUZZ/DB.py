@@ -15,3 +15,13 @@ def real_buzz(buzzer_pin, pitch, duration):
         time.sleep(delay)
     GPIO.cleanup(buzzer_pin)
 
+
+def buzz_loop(buzzer_pin, pitch, duration):
+    try:
+        while True:
+            real_buzz(buzzer_pin, pitch, duration)
+            time.sleep(1)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+
+

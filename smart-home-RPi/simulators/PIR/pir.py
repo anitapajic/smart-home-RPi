@@ -23,7 +23,7 @@ def simulated_pir(name, print_lock, stop_event):
                 simulated_motion_detected(name, print_lock)
             else:
                 simulated_no_motion(name, print_lock)
-            time.sleep(2)
+            time.sleep(3)
             if stop_event.is_set():
                 break
 

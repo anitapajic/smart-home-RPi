@@ -12,22 +12,38 @@ class DL(object):
 
 
     def toggle(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin, GPIO.OUT)
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.pin, GPIO.OUT)
+        except:
+            pass
         self.state = not self.state  # Toggle the state
 
     def turnOn(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin, GPIO.OUT)
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.pin, GPIO.OUT)
+        except:
+            pass
         if not self.state:
-            GPIO.output(self.pin, GPIO.HIGH)
+            try:
+                GPIO.output(self.pin, GPIO.HIGH)
+            except:
+                pass
+
             self.state = True
 
     def turnOff(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.pin, GPIO.OUT)
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.pin, GPIO.OUT)
+        except:
+            pass
         if self.state:
-            GPIO.output(self.pin, GPIO.LOW)
+            try:
+                GPIO.output(self.pin, GPIO.HIGH)
+            except:
+                pass
             self.state = False
 
 

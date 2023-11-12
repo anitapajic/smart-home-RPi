@@ -15,11 +15,11 @@ def uds_callback(distance, print_lock, uds):
 def run_dus1(settings, threads, stop_event, print_lock):
     uds = settings['name']
     if settings['simulated']:
-        print("Starting dus1 sumilator")
+        #print("Starting dus1 sumilator")
         dus1_thread = threading.Thread(target=run_uds_simulator, args=(2, uds_callback, stop_event, print_lock, uds))
         dus1_thread.start()
         threads.append(dus1_thread)
-        print("Dus1 sumilator started")
+        #print("Dus1 sumilator started")
     else:
         print("Starting dus1 loop")
         trig_pin = settings['trig_pin']
