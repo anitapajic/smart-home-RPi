@@ -2,14 +2,11 @@ import sys
 import threading
 from settings import load_settings
 from components.DHT.dht import run_dht1, run_dht2
-from components.LED_DIODE.led_diode import run_dl
+from components.LED_DIODE.led_diode import run_ds
 from components.UDS.uds import run_dus1
-import time
 from threading import Lock
-from components.BUZZ.buzz import run_db1
-from simulators.BUZZ.buzz import listen_for_keypress
 from components.MS.ms import run_keypad
-from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_DS1
+from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1
 
 print_lock = Lock()
 
@@ -37,8 +34,9 @@ def run_simulators(stop_event):
     run_RPIR2(rpir2_settings, threads, stop_event, print_lock)
     dpir1_settings = settings['DPIR1']
     run_DPIR1(dpir1_settings, threads, stop_event, print_lock)
+
     ds1_settings = settings['DS1']
-    run_DS1(ds1_settings, threads, stop_event, print_lock)
+    run_ds(ds1_settings, threads, stop_event, print_lock)
     # DUS
     dus1_settings = settings['DUS1']
     run_dus1(dus1_settings, threads, stop_event, print_lock)

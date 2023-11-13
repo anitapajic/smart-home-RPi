@@ -72,3 +72,30 @@ def run_dl_loop(button_pin, dl_pin, callback, stop_event, print_lock, dl_name):
 
         # Sleep for a short period to allow handling of button presses
         time.sleep(0.1)
+
+
+def run_ds1_loop(button_pin, ds_pin, callback, stop_event, print_lock, dl_name):
+    # Initialize the door light and button
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    dl = DL(ds_pin)
+    def button_callback(channel):
+        dl.toggle()  # Toggle the door light
+        if dl.state:
+            dl.turnOn()
+            callback("Door Sensor is ON", print_lock, dl_name)
+        else:
+            dl.turnOff()
+            callback("Door Sensor is OFF", print_lock, dl_name)
+
+    # Add an interrupt for the button press
+    GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+
+    while True:
+        if stop_event.is_set():
+            dl.turnOff()  # Ensure the light is off when stopping
+            callback("Door Light is OFF", print_lock, dl_name)
+            break
+
+        # Sleep for a short period to allow handling of button presses
+        time.sleep(0.1)

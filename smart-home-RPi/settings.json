@@ -15,6 +15,12 @@
         "button_pin": 1,
         "name": "DL"
     },
+    "DS1" : {
+        "simulated" : true,
+        "pin" : 10,
+        "button_pin": 1,
+        "name" : "DS1"
+    },
     "DL_BUTTON": {
         "simulated": true,
         "pin": 1,
@@ -49,10 +55,5 @@
         "simulated" : true,
         "pin" : 10,
         "name" : "DPIR2"
-    },
-    "DS1" : {
-        "simulated" : true,
-        "pin" : 10,
-        "name" : "DS1"
     }
 }
