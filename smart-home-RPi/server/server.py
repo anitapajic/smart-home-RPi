@@ -3,13 +3,18 @@ from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 import paho.mqtt.client as mqtt
 import json
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 
 app = Flask(__name__)
 
 
 # InfluxDB Configuration
-token = "R_zGigcfY5RFWIxvcyxI5NyzIubr21mws_yxIXekd_qwKVlv5BSZZcoQ0FlS8C_3v2WkF7u55reTb7yVuoo7mA=="
+token = os.getenv("INFLUXDB_TOKEN")
 org = "24-43"
 url = "http://localhost:8086"
 bucket = "smart_home_db"
@@ -24,6 +29,12 @@ mqtt_client.loop_start()
 def on_connect(client, userdata, flags, rc):
     client.subscribe("Temperature")
     client.subscribe("Humidity")
+    client.subscribe("Buttons")
+    client.subscribe("Buzzers")
+    client.subscribe("LED")
+    client.subscribe("Keypads")
+    client.subscribe("Pirs")
+    client.subscribe("Uds")
 
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = lambda client, userdata, msg: save_to_db(json.loads(msg.payload.decode('utf-8')))
@@ -40,6 +51,9 @@ def save_to_db(data):
     )
     write_api.write(bucket=bucket, org=org, record=point)
 
+@app.route('/')
+def home():
+    return f"Secret Key: {token}"
 
 # Route to store dummy data
 # @app.route('/store_data', methods=['POST'])

@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/broker_settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/BUTTON/ds1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/broker-config/mosquitto.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/BUTTON/DS1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/simulators/BUTTON/ds1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DHT/dht.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/PIR/pir.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/DHT/dht.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/LED_DIODE/led_diode.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/LED_DIODE/led_diode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/.env" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,18 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/anita/OneDrive/Radna površina/FAKULTET/IV godina/I semestar/IoT/IoT-project/smart-home-RPi",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/anita/OneDrive/Radna površina/FAKULTET/IV godina/I semestar/IoT/IoT-project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi" />
@@ -115,7 +102,7 @@
       <workItem from="1699464662585" duration="4545000" />
       <workItem from="1699478613555" duration="1538000" />
       <workItem from="1699532742122" duration="3079000" />
-      <workItem from="1701807950367" duration="4805000" />
+      <workItem from="1701807950367" duration="5948000" />
     </task>
     <servers />
   </component>
