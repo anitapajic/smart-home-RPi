@@ -2,7 +2,7 @@ import sys
 import threading
 from settings import load_settings
 from components.DHT.dht import run_dht1, run_dht2
-from components.LED_DIODE.led_diode import run_ds
+from components.BUTTON.ds1 import run_ds
 from components.UDS.uds import run_dus1
 from threading import Lock
 from components.MS.ms import run_keypad
@@ -53,7 +53,7 @@ def listen_for_stop_command(stop_event):
     if command == '0':
         for t in threads:
             stop_event.set()
-        # sys.exit(0)
+        sys.exit(0)
 
 
 if __name__ == "__main__":

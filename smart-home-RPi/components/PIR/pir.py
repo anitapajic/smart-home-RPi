@@ -11,7 +11,7 @@ def run_RPIR1(settings, threads, stop_event, print_lock):
         pir_thread.start()
         threads.append(pir_thread)
     else:
-        from sensors.PIR.DPIR1 import real_pir
+        from sensors.PIR.RPIR1 import real_pir
         pin = settings['pin']
         pir_thread = threading.Thread(target=real_pir, args=pin)
         pir_thread.start()

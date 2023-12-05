@@ -2,58 +2,69 @@
     "DHT1": {
         "simulated": true,
         "pin": 17,
-        "name": "RDHT1"
+        "name": "Room DHT 1",
+        "runs_on" : "PI1"
     },
     "DHT2": {
         "simulated": true,
         "pin": 18,
-        "name": "RDHT2"
+        "name": "Room DHT 2",
+        "runs_on" : "PI1"
     },
     "DL": {
         "simulated": true,
         "pin": 20,
         "button_pin": 1,
-        "name": "DL"
-    },
-    "DS1" : {
-        "simulated" : true,
-        "pin" : 10,
-        "button_pin": 1,
-        "name" : "DS1"
+        "name": "Door Light",
+        "runs_on" : "PI1"
     },
     "DL_BUTTON": {
         "simulated": true,
         "pin": 1,
         "dl_pin": 20,
-        "name": "DL_BUTTON"
+        "name": "Door light switch",
+        "runs_on" : "PI1"
     },
     "DB1": {
         "simulated": true,
         "pin": 16,
-        "name": "DB1"
+        "name": "Door Buzzer",
+        "runs_on" : "PI1"
     },
     "DUS1": {
         "simulated": true,
         "trig_pin": 33,
         "echo_pin": 34,
-        "name": "DUS1"
+        "name": "Door Ultrasonic Sensor",
+        "runs_on" : "PI1"
     },
     "DMS1" : {
-        "simulated" : true
+        "simulated" : true,
+        "name" : "Door keypad",
+        "runs_on" : "PI1"
     },
     "RPIR1" : {
         "simulated" : true,
-        "pin" : 10,
-        "name" : "RPIR1"
+        "pin" : 4,
+        "name" : "Room PIR 1",
+        "runs_on" : "PI1"
     },
     "RPIR2" : {
         "simulated" : true,
         "pin" : 10,
-        "name" : "RPIR2"
+        "name" : "Room PIR 2",
+        "runs_on" : "PI1"
     },
     "DPIR1" : {
         "simulated" : true,
         "pin" : 10,
-        "name" : "DPIR2"
+        "name" : "Door PIR",
+        "runs_on" : "PI1"
+    },
+    "DS1" : {
+        "simulated" : true,
+        "pin" : 10,
+        "name" : "Door Button",
+        "runs_on" : "PI1"
     }
 }

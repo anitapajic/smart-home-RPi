@@ -6,6 +6,7 @@ except:
 
 
 def motion_detected(channel):
+    print("===================================")
     print("RPIR1 detected movement!")
 
 
