@@ -5,7 +5,7 @@ try:
 except:
     pass
 
-class DL(object):
+class DS(object):
     def __init__(self, pin):
         self.pin = pin
         self.state = False  # Initialize the state as off
@@ -47,18 +47,18 @@ class DL(object):
             self.state = False
 
 
-def run_dl_loop(callback, stop_event, print_lock, settings, publish_event):
+def run_ds_loop(callback, stop_event, print_lock, settings, publish_event):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(settings['button_pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    dl = DL(settings['pin'])
+    ds = DS(settings['pin'])
     def button_callback(channel):
-        dl.toggle()  # Toggle the door light
-        if dl.state:
-            dl.turnOn()
+        ds.toggle()  # Toggle the door light
+        if ds.state:
+            ds.turnOn()
             callback(True, print_lock, settings, publish_event)
         else:
-            dl.turnOff()
+            ds.turnOff()
             callback(False, print_lock, settings, publish_event)
 
     # Add an interrupt for the button press
@@ -66,7 +66,7 @@ def run_dl_loop(callback, stop_event, print_lock, settings, publish_event):
 
     while True:
         if stop_event.is_set():
-            dl.turnOff()  # Ensure the light is off when stopping
+            ds.turnOff()  # Ensure the light is off when stopping
             callback(False, print_lock, settings, publish_event)
             break
 

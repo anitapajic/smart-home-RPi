@@ -31,37 +31,49 @@
     },
     "DL": {
         "simulated": true,
-        "pin": 20,
-        "button_pin": 1,
+        "pin": 6,
+        "button_pin": 7,
         "name": "Door Light",
         "runs_on" : "PI1"
     },
     "DL_BUTTON": {
         "simulated": true,
-        "pin": 1,
-        "dl_pin": 20,
+        "pin": 7,
+        "dl_pin": 6,
         "name": "Door light switch",
         "runs_on" : "PI1"
+    },
+    "DS1" : {
+        "simulated" : true,
+        "pin" : 8,
+        "name" : "Door Button 1",
+        "runs_on" : "PI1"
+    },
+    "DS2" : {
+        "simulated" : true,
+        "pin" : 9,
+        "name" : "Door Button 2",
+        "runs_on" : "PI2"
+    },
+    "DUS1": {
+        "simulated": true,
+        "trig_pin": 10,
+        "echo_pin": 11,
+        "name": "Door Ultrasonic Sensor 1",
+        "runs_on" : "PI1"
+    },
+    "DUS2": {
+        "simulated": true,
+        "trig_pin": 12,
+        "echo_pin": 13,
+        "name": "Door Ultrasonic Sensor 2",
+        "runs_on" : "PI2"
     },
     "DB1": {
         "simulated": true,
         "pin": 16,
         "name": "Door Buzzer",
         "runs_on" : "PI1"
-    },
-    "DUS1": {
-        "simulated": true,
-        "trig_pin": 33,
-        "echo_pin": 34,
-        "name": "Door Ultrasonic Sensor 1",
-        "runs_on" : "PI1"
-    },
-    "DUS2": {
-        "simulated": true,
-        "trig_pin": 33,
-        "echo_pin": 34,
-        "name": "Door Ultrasonic Sensor 2",
-        "runs_on" : "PI2"
     },
     "DMS1" : {
         "simulated" : true,
@@ -84,12 +96,6 @@
         "simulated" : true,
         "pin" : 10,
         "name" : "Door PIR",
-        "runs_on" : "PI1"
-    },
-    "DS1" : {
-        "simulated" : true,
-        "pin" : 10,
-        "name" : "Door Button",
         "runs_on" : "PI1"
     }
 }

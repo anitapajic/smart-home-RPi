@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import json
 from dotenv import load_dotenv
 import os
-
+from datetime import datetime
 
 load_dotenv()
 
@@ -42,14 +42,19 @@ mqtt_client.on_message = lambda client, userdata, msg: save_to_db(json.loads(msg
 
 def save_to_db(data):
     write_api = influxdb_client.write_api(write_options=SYNCHRONOUS)
+    timestamp = datetime.fromisoformat(data["timestamp"]) if "timestamp" in data else datetime.utcnow()
     point = (
         Point(data["measurement"])
         .tag("simulated", data["simulated"])
         .tag("runs_on", data["runs_on"])
         .tag("name", data["name"])
         .field("measurement", data["value"])
+        .time(timestamp)
     )
+
+
     write_api.write(bucket=bucket, org=org, record=point)
+
 
 @app.route('/')
 def home():

@@ -13,7 +13,7 @@ def generate_values():
         yield distance
 
 
-def run_uds_simulator(delay, callback, stop_event, print_lock, settings, publish_event):
+def run_dus_simulator(delay, callback, stop_event, print_lock, settings, publish_event):
     for distance in generate_values():
         time.sleep(delay)
         callback(distance, print_lock, settings, publish_event)

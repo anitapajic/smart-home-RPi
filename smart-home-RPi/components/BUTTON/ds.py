@@ -1,4 +1,4 @@
-from  simulators.LED_DIODE.led_diode import run_dl_simulator
+from simulators.BUTTON.ds import run_ds_simulator
 import threading
 import time
 from datetime import datetime
@@ -20,7 +20,7 @@ def publisher_task(event, dht_batch):
             publish_data_counter = 0
             dht_batch.clear()
         publish.multiple(local_dht_batch, hostname=HOSTNAME, port=PORT)
-        print(f'published {publish_data_limit} dl values')
+        print(f'published {publish_data_limit} ds values')
         event.clear()
 
 
@@ -52,23 +52,22 @@ def dl_callback(state, print_lock, settings, publish_event):
     }
 
     with counter_lock:
-        dht_batch.append(('LED', json.dumps(dl_payload), 0, True))
+        dht_batch.append(('Buttons', json.dumps(dl_payload), 0, True))
         publish_data_counter += 1
 
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
 
-def run_dl(settings, threads, stop_event, print_lock):
-    if settings['simulated']:
-        dl_thread = threading.Thread(target=run_dl_simulator,
-                                     args=(dl_callback, stop_event, print_lock, settings, publish_event))
-        dl_thread.start()
-        threads.append(dl_thread)
-        print("Press m to switch light")
-    else:
-        from sensors.LED_DIODE.DL import run_dl_loop
-        dl_thread = threading.Thread(target=run_dl_loop,
-                                     args=(dl_callback, stop_event, print_lock, settings, publish_event))
-        dl_thread.start()
-        threads.append(dl_thread)
 
+
+
+def run_ds(settings, threads, stop_event, print_lock):
+    if settings['simulated']:
+        dl_thread = threading.Thread(target=run_ds_simulator, args=(dl_callback, stop_event, print_lock, settings, publish_event))
+        dl_thread.start()
+        threads.append(dl_thread)
+    else:
+        from sensors.BUTTON.DS import run_ds_loop
+        dl_thread = threading.Thread(target=run_ds_loop, args=(dl_callback, stop_event, print_lock, settings, publish_event))
+        dl_thread.start()
+        threads.append(dl_thread)

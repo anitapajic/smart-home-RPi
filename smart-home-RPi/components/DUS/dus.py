@@ -1,6 +1,7 @@
-from simulators.DUS.dus import run_uds_simulator
+from simulators.DUS.dus import run_dus_simulator
 import threading
 import time
+from datetime import datetime
 import json
 import paho.mqtt.publish as publish
 from broker_settings import HOSTNAME, PORT
@@ -37,13 +38,15 @@ def dus_callback(distance, print_lock, settings, publish_event):
         print(f"UDS: {settings['name']}")
         print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
         print(f'Distance: {distance} cm')
+    current_time = datetime.utcnow().isoformat()
 
     distance_payload = {
         "measurement": "Distance",
         "simulated": settings['simulated'],
         "runs_on": settings["runs_on"],
         "name": settings["name"],
-        "value": distance
+        "value": distance,
+        "timestamp": current_time
     }
 
     with counter_lock:
@@ -55,7 +58,7 @@ def dus_callback(distance, print_lock, settings, publish_event):
 
 def run_dus(settings, threads, stop_event, print_lock):
     if settings['simulated']:
-        dus_thread = threading.Thread(target=run_uds_simulator,
+        dus_thread = threading.Thread(target=run_dus_simulator,
                                       args=(2, dus_callback, stop_event, print_lock, settings, publish_event))
         dus_thread.start()
         threads.append(dus_thread)
