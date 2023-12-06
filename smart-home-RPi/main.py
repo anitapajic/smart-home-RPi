@@ -1,7 +1,7 @@
 import sys
 import threading
 from settings import load_settings
-from components.DHT.dht import run_dht1, run_dht2
+from components.DHT.dht import run_dht
 from components.BUTTON.ds1 import run_ds
 from components.UDS.uds import run_dus1
 from threading import Lock
@@ -24,9 +24,16 @@ def run_simulators(stop_event):
     enter_thread.start()
     # DHT
     dht1_settings = settings['DHT1']
-    run_dht1(dht1_settings, threads, stop_event, print_lock)
+    run_dht(dht1_settings, threads, stop_event, print_lock)
     dht2_settings = settings['DHT2']
-    run_dht2(dht2_settings, threads, stop_event, print_lock)
+    run_dht(dht2_settings, threads, stop_event, print_lock)
+    dht3_settings = settings['DHT3']
+    run_dht(dht3_settings, threads, stop_event, print_lock)
+    dht4_settings = settings['DHT4']
+    run_dht(dht4_settings, threads, stop_event, print_lock)
+    gdht_settings = settings['GDHT']
+    run_dht(gdht_settings, threads, stop_event, print_lock)
+
     # PIR
     rpir1_settings = settings['RPIR1']
     run_RPIR1(rpir1_settings, threads, stop_event, print_lock)

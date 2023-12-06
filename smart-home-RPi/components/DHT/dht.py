@@ -5,8 +5,6 @@ import json
 import paho.mqtt.publish as publish
 from broker_settings import HOSTNAME, PORT
 
-
-
 dht_batch = []
 publish_data_counter = 0
 publish_data_limit = 5
@@ -68,33 +66,17 @@ def dht_callback(humidity, temperature, code, print_lock, dht_settings, publish_
         publish_event.set()
 
 
-def run_dht1(settings, threads, stop_event, print_lock):
-    dht = settings['name']
+def run_dht(settings, threads, stop_event, print_lock):
     if settings['simulated']:
-        dht1_thread = threading.Thread(target=run_dht_simulator, args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
-        dht1_thread.start()
-        threads.append(dht1_thread)
+        dht_thread = threading.Thread(target=run_dht_simulator,
+                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
+        dht_thread.start()
+        threads.append(dht_thread)
     else:
-        from sensors.DHT.RDHT1 import run_dht_loop, DHT
-        print("Starting dht1 loop")
-        dht = DHT(settings['pin'])
-        dht1_thread = threading.Thread(target=run_dht_loop, args=(dht, 2, dht_callback, stop_event, print_lock, dht, publish_event))
-        dht1_thread.start()
-        threads.append(dht1_thread)
-        print("Dht1 loop started")
+        from sensors.DHT.DHT import run_dht_loop, DHT
+        dht = DHT(settings['pin'], settings['runs_on'], settings['name'])
+        dht_thread = threading.Thread(target=run_dht_loop,
+                                       args=(dht, 2, dht_callback, stop_event, print_lock, settings, publish_event))
+        dht_thread.start()
+        threads.append(dht_thread)
 
-
-def run_dht2(settings, threads, stop_event, print_lock):
-    dht_name = settings['name']
-    if settings['simulated']:
-        dht1_thread = threading.Thread(target=run_dht_simulator, args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
-        dht1_thread.start()
-        threads.append(dht1_thread)
-    else:
-        from sensors.DHT.RDHT2 import run_dht_loop, DHT
-        print("Starting dht2 loop")
-        dht = DHT(settings['pin'])
-        dht1_thread = threading.Thread(target=run_dht_loop, args=(dht, 2, dht_callback, stop_event, print_lock, dht_name, publish_event))
-        dht1_thread.start()
-        threads.append(dht1_thread)
-        print("Dht2 loop started")
