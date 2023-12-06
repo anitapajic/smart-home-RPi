@@ -51,8 +51,6 @@ def save_to_db(data):
         .field("measurement", data["value"])
         .time(timestamp)
     )
-
-
     write_api.write(bucket=bucket, org=org, record=point)
 
 
