@@ -48,7 +48,7 @@ def gyro_callback(settings, publish_event, gyro, accel):
         "simulated": settings['simulated'],
         "runs_on": settings["runs_on"],
         "name": settings["name"],
-        "value": gyro,
+        "value": accel,
         "timestamp": current_time
     }
 
