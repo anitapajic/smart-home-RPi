@@ -35,6 +35,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("Keypads")
     client.subscribe("Pirs")
     client.subscribe("Distance")
+    client.subscribe("LCD")
 
 
 mqtt_client.on_connect = on_connect
