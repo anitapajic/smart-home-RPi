@@ -55,11 +55,29 @@
         "name" : "Room PIR 2",
         "runs_on" : "PI1"
     },
+    "RPIR3" : {
+        "simulated" : true,
+        "pin" : 10,
+        "name" : "Room PIR 3",
+        "runs_on" : "PI2"
+    },
+    "RPIR4" : {
+        "simulated" : true,
+        "pin" : 10,
+        "name" : "Room PIR 4",
+        "runs_on" : "PI3"
+    },
     "DPIR1" : {
         "simulated" : true,
         "pin" : 10,
-        "name" : "Door PIR",
+        "name" : "Door PIR 1",
         "runs_on" : "PI1"
+    },
+    "DPIR2" : {
+        "simulated" : true,
+        "pin" : 10,
+        "name" : "Door PIR 2",
+        "runs_on" : "PI2"
     },
     "DS1" : {
         "simulated" : true,

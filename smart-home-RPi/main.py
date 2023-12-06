@@ -6,7 +6,7 @@ from components.BUTTON.ds1 import run_ds
 from components.UDS.uds import run_dus1
 from threading import Lock
 from components.MS.ms import run_keypad
-from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1
+from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_RPIR4, run_DPIR2, run_RPIR3
 
 print_lock = Lock()
 
@@ -25,16 +25,28 @@ def run_simulators(stop_event):
     # DHT
     dht1_settings = settings['DHT1']
     run_dht1(dht1_settings, threads, stop_event, print_lock)
+
     dht2_settings = settings['DHT2']
     run_dht2(dht2_settings, threads, stop_event, print_lock)
     # PIR
     rpir1_settings = settings['RPIR1']
     run_RPIR1(rpir1_settings, threads, stop_event, print_lock)
+
     rpir2_settings = settings['RPIR2']
     run_RPIR2(rpir2_settings, threads, stop_event, print_lock)
+
+    rpir3_settings = settings['RPIR3']
+    run_RPIR3(rpir3_settings, threads, stop_event, print_lock)
+
+    rpir4_settings = settings['RPIR4']
+    run_RPIR4(rpir4_settings, threads, stop_event, print_lock)
+
     dpir1_settings = settings['DPIR1']
     run_DPIR1(dpir1_settings, threads, stop_event, print_lock)
 
+    dpir2_settings = settings['DPIR2']
+    run_DPIR2(dpir2_settings, threads, stop_event, print_lock)
+    # DS
     ds1_settings = settings['DS1']
     run_ds(ds1_settings, threads, stop_event, print_lock)
     # DUS
