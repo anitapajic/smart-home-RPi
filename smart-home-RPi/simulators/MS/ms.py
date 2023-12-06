@@ -19,7 +19,8 @@ def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callbac
                 print("===========================================")
                 print("Buttons pressed during the simulation:")
                 print(", ".join(pressed_buttons))
-                ms_callback(print_lock, stop_event, settings, publish_event, pressed_buttons)
+                code = ", ".join(pressed_buttons)
+                ms_callback(print_lock, stop_event, settings, publish_event, code)
         else:
             with print_lock:
                 print("No buttons were pressed during the simulation.")

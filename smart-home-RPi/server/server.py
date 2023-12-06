@@ -52,6 +52,7 @@ def save_to_db(data):
     )
     write_api.write(bucket=bucket, org=org, record=point)
 
+
 @app.route('/')
 def home():
     return f"Secret Key: {token}"

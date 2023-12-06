@@ -42,6 +42,7 @@ def ms_callback(print_lock, stop_event, ms_settings, publish_event, code):
         "name": ms_settings["name"],
         "value": code
     }
+    print(code_payload)
 
     with counter_lock:
         ms_batch.append(('Keypads', json.dumps(code_payload), 0, True))

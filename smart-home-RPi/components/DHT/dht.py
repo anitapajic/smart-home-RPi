@@ -35,14 +35,14 @@ publisher_thread.start()
 def dht_callback(humidity, temperature, code, print_lock, dht_settings, publish_event):
     global publish_data_counter, publish_data_limit
 
-    with print_lock:
-        t = time.localtime()
-        print("=" * 20)
-        print(f"DHT: {dht_settings['name']}")
-        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(f"Code: {code}")
-        print(f"Humidity: {humidity}%")
-        print(f"Temperature: {temperature}°C")
+    # with print_lock:
+    #     t = time.localtime()
+    #     print("=" * 20)
+    #     print(f"DHT: {dht_settings['name']}")
+    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+    #     print(f"Code: {code}")
+    #     print(f"Humidity: {humidity}%")
+    #     print(f"Temperature: {temperature}°C")
 
     temp_payload = {
         "measurement": "Temperature",

@@ -4,12 +4,13 @@ import time
 
 
 def dl_callback(state, print_lock, dl):
-    with print_lock:
-        t = time.localtime()
-        print("=" * 20)
-        print(f"{dl}")
-        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(f"State: {state}")
+    pass
+    # with print_lock:
+    #     t = time.localtime()
+    #     print("=" * 20)
+    #     print(f"{dl}")
+    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+    #     print(f"State: {state}")
 
 
 

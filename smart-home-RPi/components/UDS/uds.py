@@ -5,12 +5,13 @@ import time
 
 
 def uds_callback(distance, print_lock, uds):
-    with print_lock:
-        t = time.localtime()
-        print("=" * 20)
-        print(f"UDS: {uds}")
-        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(distance)
+    pass
+    # with print_lock:
+    #     t = time.localtime()
+    #     print("=" * 20)
+    #     print(f"UDS: {uds}")
+    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+    #     print(distance)
 
 def run_dus1(settings, threads, stop_event, print_lock):
     uds = settings['name']

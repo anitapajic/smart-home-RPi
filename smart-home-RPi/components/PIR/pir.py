@@ -8,7 +8,7 @@ from broker_settings import HOSTNAME, PORT
 
 pir_batch = []
 publish_data_counter = 0
-publish_data_limit = 5
+publish_data_limit = 10
 counter_lock = threading.Lock()
 
 
