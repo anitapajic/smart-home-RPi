@@ -26,6 +26,7 @@ mqtt_client = mqtt.Client()
 mqtt_client.connect("localhost", 1883, 60)
 mqtt_client.loop_start()
 
+
 def on_connect(client, userdata, flags, rc):
     client.subscribe("Temperature")
     client.subscribe("Humidity")
@@ -35,6 +36,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("Keypads")
     client.subscribe("Pirs")
     client.subscribe("Distance")
+    client.subscribe("Gyroscope")
     client.subscribe("LCD")
 
 
