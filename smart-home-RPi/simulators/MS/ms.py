@@ -12,15 +12,15 @@ def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callbac
         for _ in range(5):
             simulated_key_press = random.choice(list(valid_buttons))
             pressed_buttons.append(simulated_key_press)
-            time.sleep(2)  # Debounce delay
+            time.sleep(0.2)  # Debounce delay
 
         if pressed_buttons:
-            with print_lock:
-                print("===========================================")
-                print("Buttons pressed during the simulation:")
-                print(", ".join(pressed_buttons))
-                code = ", ".join(pressed_buttons)
-                ms_callback(print_lock, stop_event, settings, publish_event, code)
+            # with print_lock:
+            #     print("===========================================")
+            #     print("Buttons pressed during the simulation:")
+            #     print(", ".join(pressed_buttons))
+            code = ", ".join(pressed_buttons)
+            ms_callback(print_lock, stop_event, settings, publish_event, code)
         else:
             with print_lock:
                 print("No buttons were pressed during the simulation.")

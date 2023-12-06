@@ -32,12 +32,12 @@ publisher_thread.start()
 def dl_callback(state, print_lock, settings, publish_event):
     global publish_data_counter, publish_data_limit
 
-    with print_lock:
-        t = time.localtime()
-        print("=" * 20)
-        print(f"{settings['name']}")
-        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(f"State: {state}")
+    # with print_lock:
+    #     t = time.localtime()
+    #     print("=" * 20)
+    #     print(f"{settings['name']}")
+    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+    #     print(f"State: {state}")
 
     current_time = datetime.utcnow().isoformat()
 
