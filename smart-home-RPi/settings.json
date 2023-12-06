@@ -121,5 +121,10 @@
         "pin" : 10,
         "name" : "Door PIR 2",
         "runs_on" : "PI2"
+    },
+    "GRG" : {
+        "simulated" : true,
+        "name" : "Gun Safe Gyro",
+        "runs_on" : "PI2"
     }
 }
