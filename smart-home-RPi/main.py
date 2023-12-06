@@ -3,7 +3,7 @@ import threading
 from settings import load_settings
 from components.DHT.dht import run_dht
 from components.BUTTON.ds1 import run_ds
-from components.UDS.uds import run_dus1
+from components.DUS.dus import run_dus
 from threading import Lock
 from components.MS.ms import run_keypad
 from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1
@@ -46,7 +46,9 @@ def run_simulators(stop_event):
     run_ds(ds1_settings, threads, stop_event, print_lock)
     # DUS
     dus1_settings = settings['DUS1']
-    run_dus1(dus1_settings, threads, stop_event, print_lock)
+    run_dus(dus1_settings, threads, stop_event, print_lock)
+    dus2_settings = settings['DUS2']
+    run_dus(dus2_settings, threads, stop_event, print_lock)
     # MS
     dms1_settings = settings['DMS1']
     run_keypad(dms1_settings, threads, stop_event, print_lock)

@@ -92,7 +92,8 @@ def parseCheckCode(code):
         return "DHTLIB_INVALID_VALUE"
 
 
-def run_dht_loop(dht, delay, callback, stop_event, print_lock, settings, publish_event):
+def run_dht_loop(delay, callback, stop_event, print_lock, settings, publish_event):
+    dht = DHT(settings['pin'], settings['runs_on'], settings['name'])
     while True:
         check = dht.readDHT()
         code = parseCheckCode(check)

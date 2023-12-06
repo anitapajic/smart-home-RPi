@@ -53,8 +53,15 @@
         "simulated": true,
         "trig_pin": 33,
         "echo_pin": 34,
-        "name": "Door Ultrasonic Sensor",
+        "name": "Door Ultrasonic Sensor 1",
         "runs_on" : "PI1"
+    },
+    "DUS2": {
+        "simulated": true,
+        "trig_pin": 33,
+        "echo_pin": 34,
+        "name": "Door Ultrasonic Sensor 2",
+        "runs_on" : "PI2"
     },
     "DMS1" : {
         "simulated" : true,

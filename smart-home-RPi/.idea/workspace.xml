@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sensors/DHT/GDHT.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/DHT/RDHT3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/DHT/RDHT4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DHT/dht.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/.env" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/UDS/uds.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DUS/dus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/DHT/RDHT1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DHT/RDHT1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/DHT/RDHT2.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DHT/RDHT2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/DHT/DHT.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DHT/DHT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/UDS/DUS1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DUS/DUS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/UDS/uds.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/DUS/dus.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

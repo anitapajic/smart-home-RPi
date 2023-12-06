@@ -30,13 +30,13 @@ publisher_thread.daemon = True
 publisher_thread.start()
 
 
-def dht_callback(humidity, temperature, code, print_lock, dht_settings, publish_event):
+def dht_callback(humidity, temperature, code, print_lock, settings, publish_event):
     global publish_data_counter, publish_data_limit
 
     with print_lock:
         t = time.localtime()
         print("=" * 20)
-        print(f"DHT: {dht_settings['name']}")
+        print(f"DHT: {settings['name']}")
         print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
         print(f"Code: {code}")
         print(f"Humidity: {humidity}%")
@@ -44,17 +44,17 @@ def dht_callback(humidity, temperature, code, print_lock, dht_settings, publish_
 
     temp_payload = {
         "measurement": "Temperature",
-        "simulated": dht_settings['simulated'],
-        "runs_on": dht_settings["runs_on"],
-        "name": dht_settings["name"],
+        "simulated": settings['simulated'],
+        "runs_on": settings["runs_on"],
+        "name": settings["name"],
         "value": temperature
     }
 
     humidity_payload = {
         "measurement": "Humidity",
-        "simulated": dht_settings['simulated'],
-        "runs_on": dht_settings["runs_on"],
-        "name": dht_settings["name"],
+        "simulated": settings['simulated'],
+        "runs_on": settings["runs_on"],
+        "name": settings["name"],
         "value": humidity
     }
     with counter_lock:
@@ -73,10 +73,9 @@ def run_dht(settings, threads, stop_event, print_lock):
         dht_thread.start()
         threads.append(dht_thread)
     else:
-        from sensors.DHT.DHT import run_dht_loop, DHT
-        dht = DHT(settings['pin'], settings['runs_on'], settings['name'])
+        from sensors.DHT.DHT import run_dht_loop
         dht_thread = threading.Thread(target=run_dht_loop,
-                                       args=(dht, 2, dht_callback, stop_event, print_lock, settings, publish_event))
+                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
         dht_thread.start()
         threads.append(dht_thread)
 
