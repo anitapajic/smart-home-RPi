@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/sensors/PIR/DPIR2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/PIR/RPIR3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/PIR/RPIR4.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/PIR/pir.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/MS/ms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/.env" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/MS/DMS1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/MS/DMS1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/MS/ms.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <workItem from="1699532742122" duration="3079000" />
       <workItem from="1701807950367" duration="5948000" />
       <workItem from="1701814047274" duration="3730000" />
-      <workItem from="1701873997681" duration="1980000" />
+      <workItem from="1701873997681" duration="3707000" />
     </task>
     <servers />
   </component>
@@ -131,6 +124,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1701875050233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1701877543906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

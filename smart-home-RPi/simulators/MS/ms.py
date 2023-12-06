@@ -2,7 +2,7 @@ import time
 import random
 
 
-def simulated_keypad(print_lock, stop_event):
+def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callback):
     while True:
         if stop_event.is_set():
             break
@@ -19,6 +19,7 @@ def simulated_keypad(print_lock, stop_event):
                 print("===========================================")
                 print("Buttons pressed during the simulation:")
                 print(", ".join(pressed_buttons))
+                ms_callback(print_lock, stop_event, settings, publish_event, pressed_buttons)
         else:
             with print_lock:
                 print("No buttons were pressed during the simulation.")

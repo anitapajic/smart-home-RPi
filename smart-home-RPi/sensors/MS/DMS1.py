@@ -43,15 +43,25 @@ def read_line(line, characters):
     GPIO.output(line, GPIO.LOW)
 
 # Function to read from the keypad
-def real_keypad(stop_event):
+def real_keypad(print_lock, stop_event, settings, publish_event, ms_callback):
     setup_gpio()
-
+    accumulated_keys = ''  # Variable to accumulate keypresses
     try:
         while not stop_event.is_set():
-            read_line(R1, ["1", "2", "3", "A"])
-            read_line(R2, ["4", "5", "6", "B"])
-            read_line(R3, ["7", "8", "9", "C"])
-            read_line(R4, ["*", "0", "#", "D"])
+            for line, characters in [(R1, ["1", "2", "3", "A"]),
+                                     (R2, ["4", "5", "6", "B"]),
+                                     (R3, ["7", "8", "9", "C"]),
+                                     (R4, ["*", "0", "#", "D"])]:
+                keypress = read_line(line, characters)
+                if keypress:
+                    print(keypress)  # Print the keypress
+                    accumulated_keys += keypress  # Add keypress to the accumulated string
+
+                    # Check if the accumulated keys form a complete code
+                    if len(accumulated_keys) == 5:
+                        ms_callback(print_lock, stop_event, settings, publish_event, accumulated_keys)
+                        accumulated_keys = ''  # Reset for the next code
+
             time.sleep(0.2)
     except KeyboardInterrupt:
         print("\nApplication stopped!")
