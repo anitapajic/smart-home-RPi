@@ -42,7 +42,7 @@ def dl_callback(state, print_lock, settings, publish_event):
     current_time = datetime.utcnow().isoformat()
 
     dl_payload = {
-        "measurement": "Door light",
+        "measurement": "Door Sensor",
         "simulated": settings['simulated'],
         "runs_on": settings["runs_on"],
         "name": settings["name"],
