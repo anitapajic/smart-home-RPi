@@ -69,9 +69,15 @@
         "name": "Door Ultrasonic Sensor 2",
         "runs_on" : "PI2"
     },
+    "GLCD": {
+        "simulated" : true,
+        "pin" : 14,
+        "name" : "Garage LCD",
+        "runs_on" : "PI2"
+    },
     "DB1": {
         "simulated": true,
-        "pin": 16,
+        "pin": 15,
         "name": "Door Buzzer",
         "runs_on" : "PI1"
     },
@@ -88,37 +94,37 @@
     },
     "RPIR1" : {
         "simulated" : true,
-        "pin" : 4,
+        "pin" : 17,
         "name" : "Room PIR 1",
         "runs_on" : "PI1"
     },
     "RPIR2" : {
         "simulated" : true,
-        "pin" : 10,
+        "pin" : 18,
         "name" : "Room PIR 2",
         "runs_on" : "PI1"
     },
     "RPIR3" : {
         "simulated" : true,
-        "pin" : 10,
+        "pin" : 19,
         "name" : "Room PIR 3",
         "runs_on" : "PI2"
     },
     "RPIR4" : {
         "simulated" : true,
-        "pin" : 10,
+        "pin" : 20,
         "name" : "Room PIR 4",
         "runs_on" : "PI3"
     },
     "DPIR1" : {
         "simulated" : true,
-        "pin" : 10,
+        "pin" : 21,
         "name" : "Door PIR 1",
         "runs_on" : "PI1"
     },
     "DPIR2" : {
         "simulated" : true,
-        "pin" : 10,
+        "pin" : 22,
         "name" : "Door PIR 2",
         "runs_on" : "PI2"
     }

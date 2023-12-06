@@ -7,6 +7,7 @@ from components.DUS.dus import run_dus
 from threading import Lock
 from components.MS.ms import run_keypad
 from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_RPIR4, run_DPIR2, run_RPIR3
+from components.LCD.lcd import run_lcd
 
 print_lock = Lock()
 
@@ -75,6 +76,10 @@ def run_simulators(stop_event):
     # MS
     dms1_settings = settings['DMS1']
     run_keypad(dms1_settings, threads, stop_event, print_lock)
+
+    #LCD
+    glcd_settings = settings["GLCD"]
+    run_lcd(glcd_settings, threads, stop_event, print_lock)
 
     for thread in threads:
         thread.join()
