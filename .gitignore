@@ -1,0 +1,5 @@
+
+smart-home-RPi/infrastructure/.env
+*.pyc
+smart-home-RPi/infrastructure/.env
+*.xml

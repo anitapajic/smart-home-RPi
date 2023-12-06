@@ -47,27 +47,27 @@ class DL(object):
             self.state = False
 
 
-def run_dl_loop(button_pin, dl_pin, callback, stop_event, print_lock, dl_name):
+def run_dl_loop(callback, stop_event, print_lock, settings, publish_event):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    dl = DL(dl_pin)
+    GPIO.setup(settings['button_pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    dl = DL(settings['pin'])
     def button_callback(channel):
         dl.toggle()  # Toggle the door light
         if dl.state:
             dl.turnOn()
-            callback("Door Light is ON", print_lock, dl_name)
+            callback(True, print_lock, settings, publish_event)
         else:
             dl.turnOff()
-            callback("Door Light is OFF", print_lock, dl_name)
+            callback(False, print_lock, settings, publish_event)
 
     # Add an interrupt for the button press
-    GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+    GPIO.add_event_detect(settings['button_pin'], GPIO.FALLING, callback=button_callback, bouncetime=200)
 
     while True:
         if stop_event.is_set():
             dl.turnOff()  # Ensure the light is off when stopping
-            callback("Door Light is OFF", print_lock, dl_name)
+            callback(False, print_lock, settings, publish_event)
             break
 
         # Sleep for a short period to allow handling of button presses

@@ -1,23 +1,28 @@
-
 try:
     import RPi.GPIO as GPIO
 except:
     pass
 
 
-def motion_detected(channel):
-    print("RPIR1 detected movement!")
-
-
-def no_motion(channel):
-    print("You stopped moving")
-
-
-def real_pir(PIR_PIN):
+def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event, pir_callback):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(PIR_PIN, GPIO.IN)
 
-    GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=motion_detected)
-    # GPIO.add_event_detect(PIR_PIN, GPIO.FALLING, callback=no_motion)
+    def motion_detected_callback(channel):
+        print("RPIR1 detected movement!")
+        pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 1)
 
-    input("Press any key to exit...")
+    def motion_ended_callback(channel):
+        pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 0)
+        print("You stopped moving")
+
+    GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=motion_detected_callback)
+    # GPIO.add_event_detect(PIR_PIN, GPIO.FALLING, callback=motion_ended_callback)
+
+    try:
+        while not stop_event.is_set():
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nReal PIR sensor stopped!")
+    finally:
+        GPIO.cleanup()
