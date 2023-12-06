@@ -4,7 +4,7 @@ try:
     import RPi.GPIO as GPIO
 except:
     pass
-class DUS1(object):
+class DUS(object):
     def __init__(self, trig_pin, echo_pin):
         self.trig_pin = trig_pin
         self.echo_pin = echo_pin
@@ -44,15 +44,12 @@ class DUS1(object):
         distance = (pulse_duration * 34300)/2
         return distance
 
-def run_dus_loop(trig_pin, echo_pin, delay, callback, stop_event, print_lock, dus_name):
-    dus = DUS1(trig_pin, echo_pin)
+def run_dus_loop(delay, callback, stop_event, print_lock, settings, publish_event):
+    dus = DUS(settings["trig_pin"], settings["echo_pin"])
 
     while True:
         distance = dus.get_distance()
-        if distance is not None:
-            callback(f'Distance: {distance} cm', print_lock, dus_name)
-        else:
-            callback('Measurement timed out', print_lock, dus_name)
+        callback(distance, print_lock, settings['name'], publish_event)
         if stop_event.is_set():
             break
         time.sleep(delay)

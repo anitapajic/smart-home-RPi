@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/UDS/uds.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sensors/UDS/DUS1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/simulators/UDS/uds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IoT-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IoT-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/LED_DIODE/DL.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/LED_DIODE/DL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/LED_DIODE/led_diode.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/LED_DIODE/led_diode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BUTTON/ds.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUTTON/ds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -41,7 +40,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tamaradzambic/Desktop/IoT proj/smart-home-RPi/smart-home-RPi/simulators/LED_DIODE&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tamaradzambic/Desktop/IoT proj/smart-home-RPi/smart-home-RPi/sensors/DHT&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -50,9 +49,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/simulators/LED_DIODE" />
-      <recent name="$PROJECT_DIR$/simulators" />
-      <recent name="$PROJECT_DIR$/sensors" />
+      <recent name="$PROJECT_DIR$/sensors/DHT" />
+      <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi" />
+      <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi\sensors\BUTTON" />
+      <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi\simulators\BUTTON" />
+      <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi\simulators" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/components/DHT" />
@@ -60,7 +61,29 @@
       <recent name="$PROJECT_DIR$/sensors/DHT" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main-akt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IoT-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main-akt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="IoT-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,9 +91,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Program Files\Python310\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -86,6 +109,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main-akt" />
       </list>
     </recent_temporary>
   </component>
@@ -100,13 +124,27 @@
       <workItem from="1699464662585" duration="4545000" />
       <workItem from="1699478613555" duration="1538000" />
       <workItem from="1699532742122" duration="3079000" />
+      <workItem from="1701807950367" duration="5948000" />
+      <workItem from="1701814047274" duration="1994000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1699535719720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1701894376726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main_akt.coverage" NAME="main-akt Coverage Results" MODIFIED="1701894008010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
