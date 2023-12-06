@@ -49,7 +49,7 @@ def run_dus_loop(delay, callback, stop_event, print_lock, settings, publish_even
 
     while True:
         distance = dus.get_distance()
-        callback(distance, print_lock, settings['name'], publish_event)
+        callback(distance, print_lock, settings, publish_event)
         if stop_event.is_set():
             break
         time.sleep(delay)
