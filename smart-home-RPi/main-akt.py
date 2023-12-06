@@ -4,8 +4,7 @@ from settings import load_settings
 from components.LED_DIODE.led_diode import run_dl
 import time
 from threading import Lock
-from components.BUZZ.buzz import run_db1
-from simulators.BUZZ.buzz import listen_for_keypress
+from components.BUZZ.buzz import run_db1, run_bb
 
 
 print_lock = Lock()
@@ -22,6 +21,7 @@ def print_menu():
     print("Select which sensor you want to simulate:")
     print("1. DB1")
     print("2. DL1")
+    print("3. BB")
     print("Enter Q to exit the application..")
     print("----------------------------------------------")
     choice = input("Enter your choice: ").strip()
@@ -40,6 +40,9 @@ def handle_choice(choice):
     elif choice == '2':
         dl_settings = settings['DL']
         run_dl(dl_settings, threads, stop_event, print_lock)
+    elif choice == '3':
+        bb_settings = settings['BB']
+        run_bb(bb_settings, threads, stop_event, print_lock)
     else:
         print("Invalid choice. Please try again.")
 

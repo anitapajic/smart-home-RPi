@@ -1,4 +1,6 @@
-from  simulators.LED_DIODE.led_diode import run_dl_simulator, run_ds_simulator
+from  simulators.LED_DIODE.led_diode import run_dl_simulator
+from  simulators.BUTTON.ds1 import run_ds_simulator
+
 import threading
 import time
 

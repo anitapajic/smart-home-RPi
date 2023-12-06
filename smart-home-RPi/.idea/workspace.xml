@@ -5,19 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/IoT-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IoT-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sensors/BUZZ/BB.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/BUTTON/ds1.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUTTON/ds1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUZZ/buzz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DHT/dht.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LED_DIODE/led_diode.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/LED_DIODE/led_diode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/MS/ms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/PIR/pir.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/UDS/uds.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/UDS/uds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main-akt.py" beforeDir="false" afterPath="$PROJECT_DIR$/main-akt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUZZ/DB.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUZZ/DB.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/MS/ms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/PIR/pir.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +71,29 @@
       <recent name="$PROJECT_DIR$/sensors/DHT" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main-akt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="IoT-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main-akt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="IoT-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,6 +119,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main-akt" />
       </list>
     </recent_temporary>
   </component>
@@ -113,7 +136,7 @@
       <workItem from="1699532742122" duration="3079000" />
       <workItem from="1701807950367" duration="5948000" />
       <workItem from="1701814047274" duration="3730000" />
-      <workItem from="1701873997681" duration="6362000" />
+      <workItem from="1701873997681" duration="10331000" />
     </task>
     <servers />
   </component>
@@ -132,6 +155,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1701880032619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1701885052135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main_akt.coverage" NAME="main-akt Coverage Results" MODIFIED="1701884857960" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

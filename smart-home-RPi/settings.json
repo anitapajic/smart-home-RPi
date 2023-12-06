@@ -31,6 +31,12 @@
         "name": "Door Buzzer",
         "runs_on" : "PI1"
     },
+    "BB": {
+        "simulated": true,
+        "pin": 16,
+        "name": "Bedroom Buzzer",
+        "runs_on" : "PI3"
+    },
     "DUS1": {
         "simulated": true,
         "trig_pin": 33,

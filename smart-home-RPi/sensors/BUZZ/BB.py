@@ -16,7 +16,7 @@ def real_buzz(buzzer_pin, pitch, duration):
     GPIO.cleanup(buzzer_pin)
 
 
-def db_loop(buzzer_pin, pitch, duration, settings, publish_event, buzz_callback):
+def bb_loop(buzzer_pin, pitch, duration, settings, publish_event, buzz_callback):
     try:
         import RPi.GPIO as GPIO
         while True:

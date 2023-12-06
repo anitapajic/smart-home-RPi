@@ -1,7 +1,7 @@
 import threading
 from simulators.MS.ms import simulated_keypad
 from sensors.MS.DMS1 import real_keypad
-import time
+from datetime import datetime
 import json
 import paho.mqtt.publish as publish
 from broker_settings import HOSTNAME, PORT
@@ -35,12 +35,15 @@ publisher_thread.start()
 def ms_callback(print_lock, stop_event, ms_settings, publish_event, code):
     global publish_data_counter, publish_data_limit
 
+    current_time = datetime.utcnow().isoformat()
+
     code_payload = {
         "measurement": "Keypads",
         "simulated": ms_settings['simulated'],
         "runs_on": ms_settings["runs_on"],
         "name": ms_settings["name"],
-        "value": code
+        "value": code,
+        "timestamp": current_time
     }
     print(code_payload)
 

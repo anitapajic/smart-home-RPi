@@ -1,6 +1,6 @@
 from simulators.DHT.dht import run_dht_simulator
 import threading
-import time
+from datetime import datetime
 import json
 import paho.mqtt.publish as publish
 from broker_settings import HOSTNAME, PORT
@@ -43,21 +43,26 @@ def dht_callback(humidity, temperature, code, print_lock, dht_settings, publish_
     #     print(f"Code: {code}")
     #     print(f"Humidity: {humidity}%")
     #     print(f"Temperature: {temperature}°C")
+    current_time = datetime.utcnow().isoformat()
 
     temp_payload = {
         "measurement": "Temperature",
         "simulated": dht_settings['simulated'],
         "runs_on": dht_settings["runs_on"],
         "name": dht_settings["name"],
-        "value": temperature
+        "value": temperature,
+        "timestamp": current_time
     }
+
+    current_time = datetime.utcnow().isoformat()
 
     humidity_payload = {
         "measurement": "Humidity",
         "simulated": dht_settings['simulated'],
         "runs_on": dht_settings["runs_on"],
         "name": dht_settings["name"],
-        "value": humidity
+        "value": humidity,
+        "timestamp": current_time
     }
     with counter_lock:
         dht_batch.append(('Temperature', json.dumps(temp_payload), 0, True))

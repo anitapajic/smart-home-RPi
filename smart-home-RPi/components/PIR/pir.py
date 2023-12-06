@@ -1,6 +1,6 @@
 import threading
 from simulators.PIR.pir import simulated_pir
-import time
+from datetime import datetime
 import json
 import paho.mqtt.publish as publish
 from broker_settings import HOSTNAME, PORT
@@ -34,12 +34,14 @@ publisher_thread.start()
 def pir_callback(name, print_lock, stop_event, dht_settings, publish_event, movement):
     global publish_data_counter, publish_data_limit
 
+    current_time = datetime.utcnow().isoformat()
     movement_payload = {
         "measurement": "Pirs",
         "simulated": dht_settings['simulated'],
         "runs_on": dht_settings["runs_on"],
         "name": dht_settings["name"],
-        "value": movement
+        "value": movement,
+        "timestamp": current_time
     }
 
     with counter_lock:
