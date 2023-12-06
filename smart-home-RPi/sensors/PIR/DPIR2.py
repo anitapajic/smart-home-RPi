@@ -1,4 +1,3 @@
-
 try:
     import RPi.GPIO as GPIO
 except:
@@ -10,7 +9,7 @@ def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event,
     GPIO.setup(PIR_PIN, GPIO.IN)
 
     def motion_detected_callback(channel):
-        print("DPIR1 detected movement!")
+        print("DPIR2 detected movement!")
         pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 1)
 
     def motion_ended_callback(channel):

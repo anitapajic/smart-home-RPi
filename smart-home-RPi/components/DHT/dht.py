@@ -54,6 +54,8 @@ def dht_callback(humidity, temperature, code, print_lock, settings, publish_even
         "timestamp": current_time
     }
 
+    current_time = datetime.utcnow().isoformat()
+
     humidity_payload = {
         "measurement": "Humidity",
         "simulated": settings['simulated'],

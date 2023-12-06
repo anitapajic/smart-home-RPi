@@ -36,6 +36,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("Pirs")
     client.subscribe("Distance")
 
+
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = lambda client, userdata, msg: save_to_db(json.loads(msg.payload.decode('utf-8')))
 
@@ -51,6 +52,7 @@ def save_to_db(data):
         .field("measurement", data["value"])
         .time(timestamp)
     )
+    print(point)
     write_api.write(bucket=bucket, org=org, record=point)
 
 
