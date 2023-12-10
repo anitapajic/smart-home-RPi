@@ -32,12 +32,12 @@ publisher_thread.start()
 def dus_callback(distance, print_lock, settings, publish_event):
     global publish_data_counter, publish_data_limit
 
-    with print_lock:
-        t = time.localtime()
-        print("=" * 20)
-        print(f"UDS: {settings['name']}")
-        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(f'Distance: {distance} cm')
+    # with print_lock:
+    #     t = time.localtime()
+    #     print("=" * 20)
+    #     print(f"UDS: {settings['name']}")
+    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+    #     print(f'Distance: {distance} cm')
 
     current_time = datetime.utcnow().isoformat()
 
