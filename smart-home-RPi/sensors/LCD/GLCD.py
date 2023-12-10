@@ -24,18 +24,22 @@ class LCD(object):
         self.message = ""
     def display(self):
         self.mcp.output(3, 1)  # turn on LCD backlight
-        self.lcd.begin(16, 2)  # set number of LCD lines and columns
+        self.lcd.begin(20, 2)  # set number of LCD lines and columns
         # lcd.clear()
         self.lcd.setCursor(0, 0)  # set cursor position
         # lcd.message('CPU: ' + get_cpu_temp() + '\n')  # display CPU temperature
-        self.message = get_time_now()
+        self.message = get_temperature() + get_humidity()
         self.lcd.message(self.message)  # display the time
+
 
     def destroy(self):
         self.lcd.clear()
 
-def get_time_now():  # get system time
-    return datetime.now().strftime('    %H:%M:%S')
+def get_temperature():  # get system time
+    return  f"Temperature: {random.randint(-20, 40)} °C\n"  # Random temperature between -20 and 40 degrees Celsius
+
+def get_humidity():
+    return f"Humidity: {random.randint(50, 100)} %"  # Random humidity percentage between 0 and 100
 
 def run_lcd_loop(callback, stop_event, print_lock, settings, publish_event):
     lcd = LCD()
