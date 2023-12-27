@@ -71,7 +71,6 @@
     },
     "GLCD": {
         "simulated" : true,
-        "pin" : 14,
         "name" : "Garage LCD",
         "runs_on" : "PI2"
     },
@@ -132,5 +131,10 @@
         "simulated" : true,
         "name" : "Gun Safe Gyro",
         "runs_on" : "PI2"
+    },
+    "B4SD" : {
+        "simulated" : true,
+        "name" : "4-digit 7-segment display.",
+        "runs_on" : "PI3"
     }
 }
