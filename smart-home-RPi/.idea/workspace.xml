@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/B4SD/b4sd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sensors/B4SD/B4SD.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulators/B4SD/b4sd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/IoT-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/IoT-project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LCD/lcd.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/LCD/lcd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/.env" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sensors/LCD/GLCD.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/LCD/GLCD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/LCD/lcd.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/LCD/lcd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,18 +44,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/tamaradzambic/Desktop/IoT proj/smart-home-RPi/smart-home-RPi",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tamaradzambic/Desktop/IoT proj/smart-home-RPi/smart-home-RPi&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi\sensors" />
@@ -57,6 +65,7 @@
       <recent name="C:\Users\anita\OneDrive\Radna površina\FAKULTET\IV godina\I semestar\IoT\IoT-project\smart-home-RPi\sensors\BUTTON" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sensors" />
       <recent name="$PROJECT_DIR$/components/DHT" />
       <recent name="$PROJECT_DIR$/simulators/DHT" />
       <recent name="$PROJECT_DIR$/sensors/DHT" />
@@ -128,12 +137,17 @@
       <workItem from="1701807950367" duration="5948000" />
       <workItem from="1701814047274" duration="1994000" />
       <workItem from="1702218793012" duration="3946000" />
-      <workItem from="1702224663449" duration="689000" />
+      <workItem from="1702224663449" duration="793000" />
+      <workItem from="1702652542076" duration="23000" />
+      <workItem from="1703705640041" duration="6592000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -5,6 +5,7 @@ from Adafruit_LCD1602 import Adafruit_CharLCD
 
 from time import sleep, strftime
 from datetime import datetime
+import random
 
 
 PCF8574_address = 0x27  # I2C address of the PCF8574 chip.
@@ -36,7 +37,7 @@ class LCD(object):
         self.lcd.clear()
 
 def get_temperature():  # get system time
-    return  f"Temperature: {random.randint(-20, 40)} °C\n"  # Random temperature between -20 and 40 degrees Celsius
+    return f"Temperature: {random.randint(-20, 40)} °C\n"  # Random temperature between -20 and 40 degrees Celsius
 
 def get_humidity():
     return f"Humidity: {random.randint(50, 100)} %"  # Random humidity percentage between 0 and 100
@@ -52,16 +53,5 @@ def run_lcd_loop(callback, stop_event, print_lock, settings, publish_event):
             break
         sleep(0.1)
 
-# def get_cpu_temp():  # get CPU temperature and store it into file "/sys/class/thermal/thermal_zone0/temp"
-#     tmp = open('/sys/class/thermal/thermal_zone0/temp')
-#     cpu = tmp.read()
-#     tmp.close()
-#     return '{:.2f}'.format(float(cpu) / 1000) + ' C'
-#
-# if __name__ == '__main__':
-#     print('Program is starting ... ')
-#     try:
-#         loop()
-#     except KeyboardInterrupt:
-#         destroy()
+
 

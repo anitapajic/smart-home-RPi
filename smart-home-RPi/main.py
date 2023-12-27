@@ -9,6 +9,7 @@ from components.MS.ms import run_keypad
 from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_RPIR4, run_DPIR2, run_RPIR3
 from components.GYRO.gyro import run_gyro
 from components.LCD.lcd import run_lcd
+from components.B4SD.b4sd import run_b4sd
 
 print_lock = Lock()
 
@@ -37,7 +38,7 @@ def run_simulators(stop_event):
 
     dht4_settings = settings['DHT4']
     run_dht(dht4_settings, threads, stop_event, print_lock)
-    
+
     gdht_settings = settings['GDHT']
     run_dht(gdht_settings, threads, stop_event, print_lock)
 
@@ -85,6 +86,10 @@ def run_simulators(stop_event):
     #LCD
     glcd_settings = settings["GLCD"]
     run_lcd(glcd_settings, threads, stop_event, print_lock)
+
+    #B4SD
+    b4sd_settings = settings["B4SD"]
+    run_b4sd(b4sd_settings, threads, stop_event, print_lock)
 
     for thread in threads:
         thread.join()
