@@ -16,13 +16,15 @@ def real_buzz(buzzer_pin, pitch, duration):
     GPIO.cleanup(buzzer_pin)
 
 
-def db_loop(buzzer_pin, pitch, duration, settings, publish_event, buzz_callback):
+def db_loop(buzzer_pin, pitch, duration, settings, publish_event, buzz_callback, alarm):
     try:
         import RPi.GPIO as GPIO
         while True:
+            alarm.wait()
             real_buzz(buzzer_pin, pitch, duration)
             time.sleep(1)
             buzz_callback(settings, publish_event, 1)
+            alarm.clear()
     except KeyboardInterrupt:
         GPIO.cleanup()
 
