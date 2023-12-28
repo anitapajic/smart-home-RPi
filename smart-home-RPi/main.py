@@ -93,9 +93,9 @@ def run_simulators(stop_event):
     # dus2_settings = settings['DUS2']
     # run_dus(dus2_settings, threads, stop_event, print_lock)
     #
-    # # MS
-    # dms1_settings = settings['DMS1']
-    # run_keypad(dms1_settings, threads, stop_event, print_lock)
+    # MS
+    dms1_settings = settings['DMS1']
+    run_keypad(dms1_settings, threads, stop_event, print_lock)
     #
     # # GYRO
     # grg_settings = settings['GRG']
