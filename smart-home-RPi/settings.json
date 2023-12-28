@@ -32,15 +32,7 @@
     "DL": {
         "simulated": true,
         "pin": 6,
-        "button_pin": 7,
         "name": "Door Light",
-        "runs_on" : "PI1"
-    },
-    "DL_BUTTON": {
-        "simulated": true,
-        "pin": 7,
-        "dl_pin": 6,
-        "name": "Door light switch",
         "runs_on" : "PI1"
     },
     "DS1" : {

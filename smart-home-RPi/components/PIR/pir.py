@@ -31,7 +31,7 @@ publisher_thread.daemon = True
 publisher_thread.start()
 
 
-def pir_callback(name, print_lock, stop_event, dht_settings, publish_event, movement):
+def pir_callback(name, print_lock, stop_event, dht_settings, publish_event, movement, light_event):
     global publish_data_counter, publish_data_limit
 
     current_time = datetime.utcnow().isoformat()
@@ -43,6 +43,9 @@ def pir_callback(name, print_lock, stop_event, dht_settings, publish_event, move
         "value": movement,
         "timestamp": current_time
     }
+
+    if light_event and movement:
+        light_event.set()
 
     with counter_lock:
         pir_batch.append(('Pirs', json.dumps(movement_payload), 0, True))
@@ -84,17 +87,17 @@ def run_RPIR2(settings, threads, stop_event, print_lock):
         threads.append(pir_thread)
 
 
-def run_DPIR1(settings, threads, stop_event, print_lock):
+def run_DPIR1(settings, threads, stop_event, print_lock, light_event):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, light_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.DPIR1 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, light_event))
         pir_thread.start()
         threads.append(pir_thread)
 
