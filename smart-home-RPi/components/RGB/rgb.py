@@ -31,7 +31,7 @@ publisher_thread.daemon = True
 publisher_thread.start()
 
 
-def rgb_callback(name, print_lock, stop_event, rgb_settings, publish_event, color):
+def rgb_callback(rgb_settings, publish_event, color):
     global publish_data_counter, publish_data_limit
 
     current_time = datetime.utcnow().isoformat()
@@ -50,3 +50,20 @@ def rgb_callback(name, print_lock, stop_event, rgb_settings, publish_event, colo
 
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
+
+
+def run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue):
+    if rgb_settings['simulated']:
+        rgb_thread = threading.Thread(target=simulated_rgb,
+                                      args=(rgb_settings['name'], print_lock, stop_event, rgb_settings, publish_event,
+                                            rgb_callback, rgb_queue))
+        rgb_thread.start()
+        threads.append(rgb_thread)
+    else:
+        from sensors.RGB.BRGB import rgb_loop
+        rgb_thread = threading.Thread(target=rgb_loop,
+                                      args=(rgb_settings['red_pin'], rgb_settings['green_pin'], rgb_settings['blue_pin']
+                                            , stop_event, rgb_settings, publish_event, rgb_callback, print_lock,
+                                            rgb_queue))
+        rgb_thread.start()
+        threads.append(rgb_thread)

@@ -32,7 +32,7 @@ publisher_thread.daemon = True
 publisher_thread.start()
 
 
-def bir_callback(name, print_lock, stop_event, rgb_settings, publish_event, taster):
+def bir_callback(rgb_settings, publish_event, taster):
     global publish_data_counter, publish_data_limit
 
     current_time = datetime.utcnow().isoformat()
@@ -53,13 +53,15 @@ def bir_callback(name, print_lock, stop_event, rgb_settings, publish_event, tast
         publish_event.set()
 
 
-def run_BIR(settings, threads, stop_event, print_lock):
-    if settings['BIR']['simulated']:
-        rgb_thread = threading.Thread(target=simulated_ir, args=(threads, print_lock, stop_event, settings, publish_event, bir_callback, rgb_publish_event, rgb_callback))
+def run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue=None):
+    if bir_settings['simulated']:
+        rgb_thread = threading.Thread(target=simulated_ir, args=(print_lock, stop_event, bir_settings, publish_event,
+                                                                 bir_callback, rgb_queue))
         rgb_thread.start()
         threads.append(rgb_thread)
     else:
         from sensors.IR.BIR import bir_loop
-        rgb_thread = threading.Thread(target=bir_loop, args=(threads, print_lock, stop_event, settings, rgb_publish_event, publish_event, rgb_callback, bir_callback))
+        rgb_thread = threading.Thread(target=bir_loop, args=(threads, print_lock, stop_event, bir_settings, publish_event,
+                                                             bir_callback, rgb_queue))
         rgb_thread.start()
         threads.append(rgb_thread)

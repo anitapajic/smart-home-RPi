@@ -111,22 +111,24 @@ def change_color(direction, colors, color_names):
     return color_names[current_color_index]
 
 
-def rgb_loop(RED_PIN, GREEN_PIN, BLUE_PIN, stop_event, settings, publish_event, rgb_callback, button, print_lock):
+def rgb_loop(RED_PIN, GREEN_PIN, BLUE_PIN, stop_event, settings, publish_event, rgb_callback, print_lock, rgb_queue):
     global current_color_name
 
     try:
         setup(RED_PIN, GREEN_PIN, BLUE_PIN)
         while not stop_event.is_set():
+            button = rgb_queue.get()
+
             if button == "UP" or button == "DOWN":
                 current_color_name = change_color(button, colors, color_names)
                 color_function = colors[current_color_index]
                 color_function(RED_PIN, GREEN_PIN, BLUE_PIN)
-                rgb_callback(settings['name'], print_lock, stop_event, settings, publish_event,current_color_name)  # Poziv callback-a sa imenom trenutne boje
+                rgb_callback(settings, publish_event, current_color_name)  # Poziv callback-a sa imenom trenutne boje
             elif button in button_to_color_name:
                 current_color_name = button_to_color_name[button]
                 color_function = globals()[current_color_name]
                 color_function(RED_PIN, GREEN_PIN, BLUE_PIN)
-                rgb_callback(settings['name'], print_lock, stop_event, settings, publish_event,current_color_name)  # Poziv callback-a sa imenom trenutne boje
+                rgb_callback(settings, publish_event, current_color_name)  # Poziv callback-a sa imenom trenutne boje
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nBRGB sensor stopped!")

@@ -12,11 +12,13 @@ from components.LCD.lcd import run_lcd
 from components.IR.ir import run_BIR
 from components.B4SD.b4sd import run_b4sd
 from components.LED_DIODE.led_diode import run_dl
+from components.RGB.rgb import run_rgb
 from queue import Queue
 
 print_lock = Lock()
 light_event = threading.Event()
 gdht_queue = Queue()
+rgb_queue = Queue()
 
 try:
     import RPi.GPIO as GPIO
@@ -31,20 +33,28 @@ def run_simulators(stop_event):
     enter_thread.start()
 
     # DHT
-    dht1_settings = settings['DHT1']
-    run_dht(dht1_settings, threads, stop_event, print_lock)
+    # dht1_settings = settings['DHT1']
+    # run_dht(dht1_settings, threads, stop_event, print_lock)
+    #
+    # dht2_settings = settings['DHT2']
+    # run_dht(dht2_settings, threads, stop_event, print_lock)
+    #
+    # dht3_settings = settings['DHT3']
+    # run_dht(dht3_settings, threads, stop_event, print_lock)
+    #
+    # dht4_settings = settings['DHT4']
+    # run_dht(dht4_settings, threads, stop_event, print_lock)
+    #
+    # gdht_settings = settings['GDHT']
+    # run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
 
-    dht2_settings = settings['DHT2']
-    run_dht(dht2_settings, threads, stop_event, print_lock)
+    # RGB
+    rgb_settings = settings['BRGB']
+    run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
 
-    dht3_settings = settings['DHT3']
-    run_dht(dht3_settings, threads, stop_event, print_lock)
-
-    dht4_settings = settings['DHT4']
-    run_dht(dht4_settings, threads, stop_event, print_lock)
-
-    gdht_settings = settings['GDHT']
-    run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
+    # BIR
+    bir_settings = settings['BIR']
+    run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
 
     # PIR
     # rpir1_settings = settings['RPIR1']
@@ -91,16 +101,13 @@ def run_simulators(stop_event):
     # grg_settings = settings['GRG']
     # run_gyro(grg_settings, threads, stop_event, print_lock)
 
-    #LCD
-    glcd_settings = settings["GLCD"]
-    run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
+    # LCD
+    # glcd_settings = settings["GLCD"]
+    # run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
 
     # #B4SD
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
-
-    #BIR
-    run_BIR(settings, threads, stop_event, print_lock)
 
     for thread in threads:
         thread.join()
