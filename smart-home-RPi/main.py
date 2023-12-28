@@ -1,18 +1,22 @@
 import sys
 import threading
+from threading import Lock
 from settings import load_settings
 from components.DHT.dht import run_dht
 from components.BUTTON.ds import run_ds
 from components.DUS.dus import run_dus
-from threading import Lock
 from components.MS.ms import run_keypad
 from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_RPIR4, run_DPIR2, run_RPIR3
 from components.GYRO.gyro import run_gyro
 from components.LCD.lcd import run_lcd
 from components.IR.ir import run_BIR
+from components.B4SD.b4sd import run_b4sd
+from components.LED_DIODE.led_diode import run_dl
+from queue import Queue
 
 print_lock = Lock()
-
+light_event = threading.Event()
+gdht_queue = Queue()
 
 try:
     import RPi.GPIO as GPIO
@@ -38,54 +42,62 @@ def run_simulators(stop_event):
 
     dht4_settings = settings['DHT4']
     run_dht(dht4_settings, threads, stop_event, print_lock)
-    
+
     gdht_settings = settings['GDHT']
-    run_dht(gdht_settings, threads, stop_event, print_lock)
+    run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
 
     # PIR
-    rpir1_settings = settings['RPIR1']
-    run_RPIR1(rpir1_settings, threads, stop_event, print_lock)
+    # rpir1_settings = settings['RPIR1']
+    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock)
+    #
+    # rpir2_settings = settings['RPIR2']
+    # run_RPIR2(rpir2_settings, threads, stop_event, print_lock)
+    #
+    # rpir3_settings = settings['RPIR3']
+    # run_RPIR3(rpir3_settings, threads, stop_event, print_lock)
+    #
+    # rpir4_settings = settings['RPIR4']
+    # run_RPIR4(rpir4_settings, threads, stop_event, print_lock)
+    #
+    # dpir1_settings = settings['DPIR1']
+    # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, light_event)
+    #
+    # dpir2_settings = settings['DPIR2']
+    # run_DPIR2(dpir2_settings, threads, stop_event, print_lock)
+    #
+    # #DL
+    # dl_settings = settings['DL']
+    # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
+    #
+    # # DS
+    # ds1_settings = settings['DS1']
+    # run_ds(ds1_settings, threads, stop_event, print_lock)
+    #
+    # ds2_settings = settings['DS2']
+    # run_ds(ds2_settings, threads, stop_event, print_lock)
+    #
+    # # DUS
+    # dus1_settings = settings['DUS1']
+    # run_dus(dus1_settings, threads, stop_event, print_lock)
+    #
+    # dus2_settings = settings['DUS2']
+    # run_dus(dus2_settings, threads, stop_event, print_lock)
+    #
+    # # MS
+    # dms1_settings = settings['DMS1']
+    # run_keypad(dms1_settings, threads, stop_event, print_lock)
+    #
+    # # GYRO
+    # grg_settings = settings['GRG']
+    # run_gyro(grg_settings, threads, stop_event, print_lock)
 
-    rpir2_settings = settings['RPIR2']
-    run_RPIR2(rpir2_settings, threads, stop_event, print_lock)
-
-    rpir3_settings = settings['RPIR3']
-    run_RPIR3(rpir3_settings, threads, stop_event, print_lock)
-
-    rpir4_settings = settings['RPIR4']
-    run_RPIR4(rpir4_settings, threads, stop_event, print_lock)
-
-    dpir1_settings = settings['DPIR1']
-    run_DPIR1(dpir1_settings, threads, stop_event, print_lock)
-
-    dpir2_settings = settings['DPIR2']
-    run_DPIR2(dpir2_settings, threads, stop_event, print_lock)
-
-    # DS
-    ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock)
-
-    ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock)
-
-    # DUS
-    dus1_settings = settings['DUS1']
-    run_dus(dus1_settings, threads, stop_event, print_lock)
-
-    dus2_settings = settings['DUS2']
-    run_dus(dus2_settings, threads, stop_event, print_lock)
-
-    # MS
-    dms1_settings = settings['DMS1']
-    run_keypad(dms1_settings, threads, stop_event, print_lock)
-
-    # GYRO
-    grg_settings = settings['GRG']
-    run_gyro(grg_settings, threads, stop_event, print_lock)
-    
     #LCD
     glcd_settings = settings["GLCD"]
-    run_lcd(glcd_settings, threads, stop_event, print_lock)
+    run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
+
+    # #B4SD
+    # b4sd_settings = settings["B4SD"]
+    # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
 
     #BIR
     run_BIR(settings, threads, stop_event, print_lock)

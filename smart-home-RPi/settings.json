@@ -32,15 +32,7 @@
     "DL": {
         "simulated": true,
         "pin": 6,
-        "button_pin": 7,
         "name": "Door Light",
-        "runs_on" : "PI1"
-    },
-    "DL_BUTTON": {
-        "simulated": true,
-        "pin": 7,
-        "dl_pin": 6,
-        "name": "Door light switch",
         "runs_on" : "PI1"
     },
     "DS1" : {
@@ -71,7 +63,6 @@
     },
     "GLCD": {
         "simulated" : true,
-        "pin" : 14,
         "name" : "Garage LCD",
         "runs_on" : "PI2"
     },
@@ -145,6 +136,11 @@
         "simulated" : true,
         "pin" : 22,
         "name" : "Bedroom Infrared Sensor",
+        "runs_on" : "PI3"
+    },
+    "B4SD" : {
+        "simulated" : true,
+        "name" : "4-digit 7-segment display.",
         "runs_on" : "PI3"
     }
 }
