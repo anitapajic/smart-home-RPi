@@ -132,5 +132,19 @@
         "simulated" : true,
         "name" : "Gun Safe Gyro",
         "runs_on" : "PI2"
+    },
+    "BRGB" : {
+        "simulated" : true,
+        "red_pin" : 22,
+        "green_pin" : 22,
+        "blue_pin" : 22,
+        "name" : "Bedroom RGB",
+        "runs_on" : "PI3"
+    },
+    "BIR" : {
+        "simulated" : true,
+        "pin" : 22,
+        "name" : "Bedroom Infrared Sensor",
+        "runs_on" : "PI3"
     }
 }

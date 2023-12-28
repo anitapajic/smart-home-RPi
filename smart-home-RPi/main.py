@@ -9,6 +9,7 @@ from components.MS.ms import run_keypad
 from components.PIR.pir import run_RPIR1, run_RPIR2, run_DPIR1, run_RPIR4, run_DPIR2, run_RPIR3
 from components.GYRO.gyro import run_gyro
 from components.LCD.lcd import run_lcd
+from components.IR.ir import run_BIR
 
 print_lock = Lock()
 
@@ -85,6 +86,9 @@ def run_simulators(stop_event):
     #LCD
     glcd_settings = settings["GLCD"]
     run_lcd(glcd_settings, threads, stop_event, print_lock)
+
+    #BIR
+    run_BIR(settings, threads, stop_event, print_lock)
 
     for thread in threads:
         thread.join()
