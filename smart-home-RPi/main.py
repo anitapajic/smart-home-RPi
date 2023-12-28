@@ -33,10 +33,11 @@ except:
     pass
 
 def alarm_p(event):
-    event.wait()
-    print("..................................")
-    time.sleep(5)
-    event.clear()
+    while True:
+        event.wait()
+        print(".................................. STOP")
+        time.sleep(5)
+        event.clear()
 
 def run_simulators(stop_event):
 
