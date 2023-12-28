@@ -5,15 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/home.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DHT/dht.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LCD/lcd.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/LCD/lcd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUZZ/buzz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/DUS/dus.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DUS/dus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/PIR/pir.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main-akt.py" beforeDir="false" afterPath="$PROJECT_DIR$/main-akt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/DHT/DHT.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DHT/DHT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sensors/LCD/GLCD.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/LCD/GLCD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/simulators/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/DHT/dht.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUZZ/DB.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUZZ/DB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/DUS/DUS.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/DUS/DUS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/DPIR2.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/DPIR2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR2.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR3.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR4.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/DUS/dus.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/DUS/dus.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/simulators/LCD/lcd.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/LCD/lcd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/PIR/pir.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +147,7 @@
       <workItem from="1702218793012" duration="3946000" />
       <workItem from="1702224663449" duration="793000" />
       <workItem from="1702652542076" duration="23000" />
-      <workItem from="1703705640041" duration="18521000" />
+      <workItem from="1703705640041" duration="28202000" />
     </task>
     <servers />
   </component>

@@ -1,8 +1,5 @@
 import time
 
-import random
-
-
 
 def run_lcd_simulator(callback, stop_event, print_lock, settings, publish_event, queue):
     while True:

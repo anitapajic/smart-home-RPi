@@ -20,8 +20,7 @@ def print_menu():
     print("----------------------------------------------")
     print("Select which sensor you want to simulate:")
     print("1. DB1")
-    print("2. DL1")
-    print("3. BB")
+    print("2. BB")
     print("Enter Q to exit the application..")
     print("----------------------------------------------")
     choice = input("Enter your choice: ").strip()
@@ -38,9 +37,6 @@ def handle_choice(choice):
         db1_settings = settings['DB1']
         run_db1(db1_settings, threads, stop_event, print_lock)
     elif choice == '2':
-        dl_settings = settings['DL']
-        run_dl(dl_settings, threads, stop_event, print_lock)
-    elif choice == '3':
         bb_settings = settings['BB']
         run_bb(bb_settings, threads, stop_event, print_lock)
     else:
