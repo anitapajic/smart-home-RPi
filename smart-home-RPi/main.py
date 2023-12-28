@@ -1,5 +1,7 @@
 import sys
 import threading
+import time
+
 from settings import load_settings
 from components.DHT.dht import run_dht
 from components.BUTTON.ds import run_ds
@@ -30,6 +32,11 @@ try:
 except:
     pass
 
+def alarm_p(event):
+    event.wait()
+    print("..................................")
+    time.sleep(5)
+    event.clear()
 
 def run_simulators(stop_event):
 
@@ -38,6 +45,9 @@ def run_simulators(stop_event):
     enter_thread.start()
 
     home = Home("1111")
+
+    enter_thread = threading.Thread(target=alarm_p, args=(alarm_event,))
+    enter_thread.start()
 
     # # DHT
     # dht1_settings = settings['DHT1']
@@ -59,38 +69,38 @@ def run_simulators(stop_event):
     rpir1_settings = settings['RPIR1']
     run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
 
-    rpir2_settings = settings['RPIR2']
-    run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
+    # rpir2_settings = settings['RPIR2']
+    # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # rpir3_settings = settings['RPIR3']
+    # run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # rpir4_settings = settings['RPIR4']
+    # run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # dpir1_settings = settings['DPIR1']
+    # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
+    #
+    # dpir2_settings = settings['DPIR2']
+    # run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
 
-    rpir3_settings = settings['RPIR3']
-    run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    rpir4_settings = settings['RPIR4']
-    run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    dpir1_settings = settings['DPIR1']
-    run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
-
-    dpir2_settings = settings['DPIR2']
-    run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
-
-    #DL
-    dl_settings = settings['DL']
-    run_dl(dl_settings, threads, stop_event, print_lock, light_event)
-
-    # DS
-    ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock)
-
-    ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock)
-
-    # DUS
-    dus1_settings = settings['DUS1']
-    run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
-
-    dus2_settings = settings['DUS2']
-    run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
+    # DL
+    # dl_settings = settings['DL']
+    # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
+    #
+    # # DS
+    # ds1_settings = settings['DS1']
+    # run_ds(ds1_settings, threads, stop_event, print_lock)
+    #
+    # ds2_settings = settings['DS2']
+    # run_ds(ds2_settings, threads, stop_event, print_lock)
+    #
+    # # DUS
+    # dus1_settings = settings['DUS1']
+    # run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
+    #
+    # dus2_settings = settings['DUS2']
+    # run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
 
     # # MS
     # dms1_settings = settings['DMS1']
@@ -108,17 +118,17 @@ def run_simulators(stop_event):
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
 
-    #Buzzer
+    # Buzzer
     db1_settings = settings['DB1']
     run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
 
-     # RGB
-    rgb_settings = settings['BRGB']
-    run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
-
-    # BIR
-    bir_settings = settings['BIR']
-    run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
+    # # RGB
+    # rgb_settings = settings['BRGB']
+    # run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
+    #
+    # # BIR
+    # bir_settings = settings['BIR']
+    # run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
 
     for thread in threads:
         thread.join()

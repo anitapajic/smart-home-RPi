@@ -15,6 +15,5 @@ def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publi
         alarm.wait()
         with print_lock:
             print("Buzzer activated!")
-        time.sleep(1)
         simulated_buzz(pitch, duration, settings, publish_event, buzz_callback)
-        alarm.clear()
+        # alarm.clear()

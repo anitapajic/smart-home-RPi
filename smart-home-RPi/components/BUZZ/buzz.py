@@ -47,7 +47,6 @@ def buzz_callback(settings, publish_event, isOn):
         "timestamp": current_time
     }
 
-    print(movement_payload)
     with counter_lock:
         buzz_batch.append(('Buzzers', json.dumps(movement_payload), 0, True))
         publish_data_counter += 1
@@ -65,12 +64,10 @@ def run_db1(settings, threads, stop_event, print_lock, alarm):
         buzzer_thread.start()
         threads.append(buzzer_thread)
     else:
-        print("Starting real buzzer")
         buzzer_pin = settings['pin']
         buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
-        print("Real buzzer started")
 
 
 def run_bb(settings, threads, stop_event, print_lock):
