@@ -11,11 +11,11 @@ from components.GYRO.gyro import run_gyro
 from components.LCD.lcd import run_lcd
 from components.B4SD.b4sd import run_b4sd
 from components.LED_DIODE.led_diode import run_dl
-
+from queue import Queue
 
 print_lock = Lock()
 light_event = threading.Event()
-
+gdht_queue = Queue()
 
 try:
     import RPi.GPIO as GPIO
@@ -30,22 +30,22 @@ def run_simulators(stop_event):
     enter_thread.start()
 
     # DHT
-    # dht1_settings = settings['DHT1']
-    # run_dht(dht1_settings, threads, stop_event, print_lock)
-    #
-    # dht2_settings = settings['DHT2']
-    # run_dht(dht2_settings, threads, stop_event, print_lock)
-    #
-    # dht3_settings = settings['DHT3']
-    # run_dht(dht3_settings, threads, stop_event, print_lock)
-    #
-    # dht4_settings = settings['DHT4']
-    # run_dht(dht4_settings, threads, stop_event, print_lock)
-    #
-    # gdht_settings = settings['GDHT']
-    # run_dht(gdht_settings, threads, stop_event, print_lock)
-    #
-    # # PIR
+    dht1_settings = settings['DHT1']
+    run_dht(dht1_settings, threads, stop_event, print_lock)
+
+    dht2_settings = settings['DHT2']
+    run_dht(dht2_settings, threads, stop_event, print_lock)
+
+    dht3_settings = settings['DHT3']
+    run_dht(dht3_settings, threads, stop_event, print_lock)
+
+    dht4_settings = settings['DHT4']
+    run_dht(dht4_settings, threads, stop_event, print_lock)
+
+    gdht_settings = settings['GDHT']
+    run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
+
+    # PIR
     # rpir1_settings = settings['RPIR1']
     # run_RPIR1(rpir1_settings, threads, stop_event, print_lock)
     #
@@ -57,17 +57,17 @@ def run_simulators(stop_event):
     #
     # rpir4_settings = settings['RPIR4']
     # run_RPIR4(rpir4_settings, threads, stop_event, print_lock)
-
-    dpir1_settings = settings['DPIR1']
-    run_DPIR1(dpir1_settings, threads, stop_event, print_lock, light_event)
-
+    #
+    # dpir1_settings = settings['DPIR1']
+    # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, light_event)
+    #
     # dpir2_settings = settings['DPIR2']
     # run_DPIR2(dpir2_settings, threads, stop_event, print_lock)
-
-    #DL
-    dl_settings = settings['DL']
-    run_dl(dl_settings, threads, stop_event, print_lock, light_event)
-
+    #
+    # #DL
+    # dl_settings = settings['DL']
+    # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
+    #
     # # DS
     # ds1_settings = settings['DS1']
     # run_ds(ds1_settings, threads, stop_event, print_lock)
@@ -89,11 +89,11 @@ def run_simulators(stop_event):
     # # GYRO
     # grg_settings = settings['GRG']
     # run_gyro(grg_settings, threads, stop_event, print_lock)
-    #
-    # #LCD
-    # glcd_settings = settings["GLCD"]
-    # run_lcd(glcd_settings, threads, stop_event, print_lock)
-    #
+
+    #LCD
+    glcd_settings = settings["GLCD"]
+    run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
+
     # #B4SD
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
