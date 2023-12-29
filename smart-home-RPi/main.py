@@ -23,6 +23,9 @@ light_event = threading.Event()
 dus1_event = threading.Event()
 dus2_event = threading.Event()
 alarm_event = threading.Event()
+ds_event = threading.Event()
+switch1_event = threading.Event()
+switch2_event = threading.Event()
 gdht_queue = Queue()
 rgb_queue = Queue()
 
@@ -39,6 +42,14 @@ def alarm_p(event):
         print("..................................")
         time.sleep(5)
         event.clear()
+def ds_button_simulator(event, name):
+    # time.sleep(12)
+    while True:
+        if not event.is_set():
+            time.sleep(1)
+            event.set()
+            # print("..................................", name ," DS switch")
+
 
 
 def run_simulators(stop_event):
@@ -47,71 +58,74 @@ def run_simulators(stop_event):
     enter_thread = threading.Thread(target=listen_for_stop_command, args=(stop_event,))
     enter_thread.start()
 
-    home = Home("1111")
+    home = Home("1111#")
 
-    alarm_thread = threading.Thread(target=alarm_p, args=(alarm_event,))
-    alarm_thread.start()
+    enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, "1"))
+    enter1_thread.start()
+    #
+    # enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, "2"))
+    # enter2_thread.start()
+    # # DHT
+    # dht1_settings = settings['DHT1']
+    # run_dht(dht1_settings, threads, stop_event, print_lock)
+    #
+    # dht2_settings = settings['DHT2']
+    # run_dht(dht2_settings, threads, stop_event, print_lock)
+    #
+    # dht3_settings = settings['DHT3']
+    # run_dht(dht3_settings, threads, stop_event, print_lock)
+    #
+    # dht4_settings = settings['DHT4']
+    # run_dht(dht4_settings, threads, stop_event, print_lock)
+    #
+    # gdht_settings = settings['GDHT']
+    # run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
 
-    # DHT
-    dht1_settings = settings['DHT1']
-    run_dht(dht1_settings, threads, stop_event, print_lock)
+    # # PIR
+    # rpir1_settings = settings['RPIR1']
+    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # rpir2_settings = settings['RPIR2']
+    # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # rpir3_settings = settings['RPIR3']
+    # run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event)
+    #
+    # rpir4_settings = settings['RPIR4']
+    # run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
 
-    dht2_settings = settings['DHT2']
-    run_dht(dht2_settings, threads, stop_event, print_lock)
-
-    dht3_settings = settings['DHT3']
-    run_dht(dht3_settings, threads, stop_event, print_lock)
-
-    dht4_settings = settings['DHT4']
-    run_dht(dht4_settings, threads, stop_event, print_lock)
-
-    gdht_settings = settings['GDHT']
-    run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
-
-    # PIR
-    rpir1_settings = settings['RPIR1']
-    run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    rpir2_settings = settings['RPIR2']
-    run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    rpir3_settings = settings['RPIR3']
-    run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    rpir4_settings = settings['RPIR4']
-    run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
-
-    dpir1_settings = settings['DPIR1']
-    run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
-
-    dpir2_settings = settings['DPIR2']
-    run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
+    # dpir1_settings = settings['DPIR1']
+    # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
+    #
+    # dpir2_settings = settings['DPIR2']
+    # run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
 
     # DL
-    dl_settings = settings['DL']
-    run_dl(dl_settings, threads, stop_event, print_lock, light_event)
-
+    # dl_settings = settings['DL']
+    # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
+    #
     # DS
     ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock)
+    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home)
 
     ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock)
+    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home)
 
-    # DUS
-    dus1_settings = settings['DUS1']
-    run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
-
-    dus2_settings = settings['DUS2']
-    run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
-
-    # # MS
-    # dms1_settings = settings['DMS1']
-    # run_keypad(dms1_settings, threads, stop_event, print_lock)
+    # # DUS
+    # dus1_settings = settings['DUS1']
+    # run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
     #
-    # GYRO
-    grg_settings = settings['GRG']
-    run_gyro(grg_settings, threads, stop_event, print_lock, alarm_event)
+    # dus2_settings = settings['DUS2']
+    # run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
+
+    # MS
+    dms1_settings = settings['DMS1']
+    run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
+
+
+    # # GYRO
+    # grg_settings = settings['GRG']
+    # run_gyro(grg_settings, threads, stop_event, print_lock)
 
     # LCD
     glcd_settings = settings["GLCD"]

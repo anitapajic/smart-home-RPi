@@ -25,12 +25,13 @@ def simulated_pir(name, print_lock, stop_event, settings, publish_event, callbac
                 if home.people_count == 0 and "Room PIR" in name:
                     with print_lock:
                         event.set()    # u room pir to je alarm event
+                        home.alarm = True
                 if "Door PIR" in name:
                     event.set()        # u door pir je counter event
             else:
                 # simulated_no_motion(name, print_lock)
                 callback(name, print_lock, stop_event, settings, publish_event, 0, None)
-            time.sleep(10)
+            time.sleep(3)
             if stop_event.is_set():
                 break
 

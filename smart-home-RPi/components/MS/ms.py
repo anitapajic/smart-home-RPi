@@ -54,13 +54,13 @@ def ms_callback(print_lock, stop_event, ms_settings, publish_event, code):
         publish_event.set()
 
 
-def run_keypad(settings, threads, stop_event, print_lock):
+def run_keypad(settings, threads, stop_event, print_lock, home, alarm, ds_event):
     if settings['simulated']:
-        keypad_thread = threading.Thread(target=simulated_keypad, args=(print_lock, stop_event, settings, publish_event, ms_callback))
+        keypad_thread = threading.Thread(target=simulated_keypad, args=(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event))
         keypad_thread.start()
         threads.append(keypad_thread)
     else:
         print("Starting real keypad")
-        keypad_thread = threading.Thread(target=real_keypad, args=(print_lock, stop_event, settings, publish_event, ms_callback))
+        keypad_thread = threading.Thread(target=real_keypad, args=(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event))
         keypad_thread.start()
         threads.append(keypad_thread)
