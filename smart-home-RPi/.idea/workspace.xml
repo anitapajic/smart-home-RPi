@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/main-akt.py" beforeDir="false" afterPath="$PROJECT_DIR$/main-akt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BUTTON/ds.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUTTON/ds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/MS/ms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUTTON/DS.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUTTON/DS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUZZ/DB.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUZZ/DB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/LED_DIODE/DL.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/LED_DIODE/DL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/MS/DMS1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/MS/DMS1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR2.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR3.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/RPIR4.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/RPIR4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/BUTTON/ds.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUTTON/ds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUZZ/buzz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/MS/ms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/PIR/pir.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

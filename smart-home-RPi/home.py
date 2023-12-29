@@ -4,6 +4,8 @@ class Home(object):
         self.people_count = 0
         self.is_alarm_on = False
         self.alarm_pin = pin
+        self.safety_system = True
+        self.alarm = False
 
     def inc_counter(self):
         self.people_count += 1
@@ -14,3 +16,7 @@ class Home(object):
 
     def set_pin(self, pin):
         self.alarm_pin = pin
+        self.safety_system = True
+
+    def deactivate_safety_system(self):
+        self.safety_system = False
