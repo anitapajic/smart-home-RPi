@@ -2,33 +2,47 @@ import random
 import time
 
 
-def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callback):
+def generate_sensor_data():
+    """Generiše simulirane podatke za žiroskop i akcelerometar."""
+    gyro_data = [round(random.uniform(-32768, 32767), 2) for _ in range(3)]
+    accel_data = [round(random.uniform(-32768, 32767), 2) for _ in range(3)]
+    return gyro_data, accel_data
+
+
+def convert_sensor_data(raw_data, conversion_factor):
+    """Konvertuje sirove podatke senzora u fizičke jedinice."""
+    return [round(d / conversion_factor, 2) for d in raw_data]
+
+
+def detect_unusual_activity(gyro_data, accel_data, gyro_threshold=250.0, accel_threshold=3.9):
+    if any(abs(g) > gyro_threshold for g in gyro_data):
+        return True
+    if any(abs(a - 1) > accel_threshold for a in accel_data):  # Oduzimamo 1 da uklonimo uticaj gravitacije
+        return True
+    return False
+
+
+def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callback, alarm_event):
     try:
+        gyro_threshold = 250.0  # Prag za žiroskop
+        accel_threshold = 1.9  # Prag za akcelerometar
         while True:
             if stop_event.is_set():
                 break
+            gyro_raw, accel_raw = generate_sensor_data()
+            gyro_converted = convert_sensor_data(gyro_raw, 131.0)
+            accel_converted = convert_sensor_data(accel_raw, 16384.0)
+            gyro_value = str(gyro_converted)
+            accel_value = str(accel_converted)
 
-            # Simulated Gyroscope Data (Raw and Converted)
-            gyro_xyz_raw = [round(random.uniform(-32768, 32767), 2) for _ in range(3)]
-            gyro_xyz_converted = [round(g / 131.0, 2) for g in gyro_xyz_raw]
-
-            # Simulated Accelerometer Data (Raw and Converted)
-            accel_xyz_raw = [round(random.uniform(-32768, 32767), 2) for _ in range(3)]
-            accel_xyz_converted = [round(a / 16384.0, 2) for a in accel_xyz_raw]
-
-            # Printing the simulated data
-            with print_lock:
-                print("a/g:%d\t%d\t%d\t%d\t%d\t%d " % tuple(accel_xyz_raw + gyro_xyz_raw))
-                print("a/g:%.2f g\t%.2f g\t%.2f g\t%.2f d/s\t%.2f d/s\t%.2f d/s" % tuple(
-                    accel_xyz_converted + gyro_xyz_converted))
-
-            # Callbacks for further processing (if needed)
-
-            gyro_value = str(gyro_xyz_converted)
-            accel_value = str(accel_xyz_converted)
             gyro_callback(settings, publish_event, gyro_value, accel_value)
 
-            time.sleep(3)
+            if detect_unusual_activity(gyro_converted, accel_converted, gyro_threshold, accel_threshold):
+                with print_lock:
+                    print("Neobična aktivnost detektovana! Aktiviranje alarma.")
+                alarm_event.set()
+
+            time.sleep(7)
 
     except KeyboardInterrupt:
             print("\nSimulated Gyro sensor stopped!")

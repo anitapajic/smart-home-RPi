@@ -14,6 +14,7 @@ def toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event):
         ds.turnOff()
         ds_callback(False, print_lock, settings, publish_event)
 
+
 def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event):
     ds = DS(settings['pin'])
     while not stop_event.is_set():
