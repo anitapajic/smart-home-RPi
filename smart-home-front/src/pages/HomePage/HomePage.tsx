@@ -6,6 +6,7 @@ export default function HomePage() {
     return (
         <>
             <StyledPage>
+                <h2>Welcome to SMART HOME</h2>
                 <ImageStyle src={houseMapImage} alt="House Map" />
             </StyledPage>
         </>

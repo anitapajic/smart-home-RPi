@@ -1,16 +1,11 @@
 import React from 'react';
+import { IFrameStyle } from './GrafanaPanel.styled';
+export type GrafanaPanelProps = {
+  url : string
+}
 
-const GrafanaPanel = () => {
-  const grafanaUrl = "http://localhost:3000/d/a144c6c1-3619-4fc7-9881-3a2e06fb2891/dht?orgId=1&from=1703805690891&to=1703809290891&viewPanel=2"; // Replace with your Grafana iframe URL
-
+export default function GrafanaPanel({url} : GrafanaPanelProps){
   return (
-    <iframe
-      src={grafanaUrl}
-      width="800px"
-      height="500px"
-      frameBorder="0"
-    ></iframe>
+    <IFrameStyle src={url}/>
   );
-};
-
-export default GrafanaPanel;
+}

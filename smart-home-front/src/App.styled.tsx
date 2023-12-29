@@ -5,6 +5,7 @@ export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #111217;
 `;
 
 export const ContentContainer = styled.div<{ isMenuOpen: boolean }>`
