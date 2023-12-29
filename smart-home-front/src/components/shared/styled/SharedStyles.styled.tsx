@@ -2,13 +2,13 @@ import { styled } from "styled-components";
 
 export const StyledPage = styled.section`
   position: relative;
-  padding-top: 50px;
+  padding-top: 30px;
 
   h2 {
     text-align: center;
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSizes.header};
-    color: ${({ theme }) => theme.colors.secondColor};
+    color: ${({ theme }) => theme.colors.main};
   }
   input {
     text-align: center;
