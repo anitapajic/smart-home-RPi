@@ -16,22 +16,24 @@ def toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, ala
     ds_callback(ds.state, print_lock, settings, publish_event)
 
 
-def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home):
+def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off):
     ds = DS(settings['pin'])
     while True:
         switch.wait()
+        switch_off.clear()
         toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, alarm_ds)
-
         if home.safety_system and ds.state:
-            ds_event.set() #unesi pin, ako ne uneses ispravan za 10s krece alarm
-
-        time.sleep(random.randint(0, 7))
-        if time.time() - ds.time > 5:
-            alarm_ds.set()
-            home.alarm = True
-            print("Otkljucana duze od 5s : ", settings['name'])
-
-        switch.clear()
+            ds_event.set()  # unesi pin, ako ne uneses ispravan za 10s krece alarm
+        while switch.is_set():
+            if time.time() - ds.time > 5:  # ds.time je timestamp kad se ukljucio
+                alarm_ds.set()
+                home.alarm = True
+            if switch_off.is_set():
+                toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, alarm_ds)
+                switch.clear()
+                alarm_ds.clear()
+                home.alarm = False
+                break
 
         if stop_event.is_set():
             ds.turn_off_sim()  # Ensure the light is off when stopping

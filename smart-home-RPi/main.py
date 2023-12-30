@@ -1,6 +1,7 @@
 import sys
 import threading
 import time
+import keyboard
 
 from settings import load_settings
 from components.DHT.dht import run_dht
@@ -26,6 +27,8 @@ alarm_event = threading.Event()
 ds_event = threading.Event()
 switch1_event = threading.Event()
 switch2_event = threading.Event()
+switch_off2 = threading.Event()
+switch_off1 = threading.Event()
 gdht_queue = Queue()
 rgb_queue = Queue()
 
@@ -42,14 +45,16 @@ def alarm_p(event):
         print("..................................")
         time.sleep(5)
         event.clear()
-def ds_button_simulator(event, name):
-    # time.sleep(12)
-    while True:
-        if not event.is_set():
-            time.sleep(1)
-            event.set()
-            # print("..................................", name ," DS switch")
 
+
+def ds_button_simulator(switch, switch_off, name, key):
+    while True:
+        if not switch.is_set():
+            keyboard.wait(key)
+            switch.set()
+        if not switch_off.is_set():
+            keyboard.wait(key, suppress=True, trigger_on_release=True)
+            switch_off.set()
 
 
 def run_simulators(stop_event):
@@ -60,11 +65,11 @@ def run_simulators(stop_event):
 
     home = Home("1111#")
 
-    enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, "1"))
+    enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
     enter1_thread.start()
-    #
-    # enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, "2"))
-    # enter2_thread.start()
+
+    enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, switch_off2, '2', 'n'))
+    enter2_thread.start()
     # # DHT
     # dht1_settings = settings['DHT1']
     # run_dht(dht1_settings, threads, stop_event, print_lock)
@@ -106,10 +111,10 @@ def run_simulators(stop_event):
     #
     # DS
     ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home)
+    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home, switch_off1)
 
     ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home)
+    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2)
 
     # # DUS
     # dus1_settings = settings['DUS1']
@@ -118,34 +123,34 @@ def run_simulators(stop_event):
     # dus2_settings = settings['DUS2']
     # run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
 
-    # MS
-    dms1_settings = settings['DMS1']
-    run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
-
+    # # MS
+    # dms1_settings = settings['DMS1']
+    # run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
+    #
 
     # # GYRO
     # grg_settings = settings['GRG']
     # run_gyro(grg_settings, threads, stop_event, print_lock)
 
-    # LCD
-    glcd_settings = settings["GLCD"]
-    run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
-
-    # B4SD
-    b4sd_settings = settings["B4SD"]
-    run_b4sd(b4sd_settings, threads, stop_event, print_lock)
+    # # LCD
+    # glcd_settings = settings["GLCD"]
+    # run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
+    #
+    # # B4SD
+    # b4sd_settings = settings["B4SD"]
+    # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
 
     # Buzzer
     db1_settings = settings['DB1']
     run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
 
-    # RGB
-    rgb_settings = settings['BRGB']
-    run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
-
-    # BIR
-    bir_settings = settings['BIR']
-    run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
+    # # RGB
+    # rgb_settings = settings['BRGB']
+    # run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
+    #
+    # # BIR
+    # bir_settings = settings['BIR']
+    # run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
 
     for thread in threads:
         thread.join()

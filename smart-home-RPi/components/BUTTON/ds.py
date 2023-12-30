@@ -61,9 +61,9 @@ def dl_callback(state, print_lock, settings, publish_event):
 
 
 
-def run_ds(settings, threads, stop_event, print_lock, alarm_ds, switch, ds_event, home):
+def run_ds(settings, threads, stop_event, print_lock, alarm_ds, switch, ds_event, home, switch_off):
     if settings['simulated']:
-        dl_thread = threading.Thread(target=run_ds_simulator, args=(dl_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home))
+        dl_thread = threading.Thread(target=run_ds_simulator, args=(dl_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off))
         dl_thread.start()
         threads.append(dl_thread)
     else:
