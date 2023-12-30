@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS  # Import CORS from Flask-CORS
 from influxdb_client import InfluxDBClient, Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 import paho.mqtt.client as mqtt
@@ -11,6 +12,8 @@ load_dotenv()
 
 
 app = Flask(__name__)
+# CORS(app)  # Enable CORS for all routes
+CORS(app, origins="http://localhost:3001")
 
 
 # InfluxDB Configuration
@@ -66,15 +69,19 @@ def home():
     return f"Secret Key: {token}"
 
 # Route to store dummy data
-# @app.route('/store_data', methods=['POST'])
-# def store_data():
-#     try:
-#         data = request.get_json()
-#         store_data(data)
-#         return jsonify({"status": "success"})
-#     except Exception as e:
-#         return jsonify({"status": "error", "message": str(e)})
-#
+@app.route('/safety_system/<string:pin>', methods=['PUT'])
+def store_data(pin):
+    try:
+        print(pin, " PIN ============")
+        try:
+            mqtt_client.publish("safety_system",  pin)
+        except Exception as e:
+            print(e)
+        # pin treba proslediti preko mqtt simulatoru
+        return jsonify({"response": "Safety System set " + pin})
+    except Exception as e:
+        return jsonify({"response": "error - " + str(e)})
+
 #
 # def handle_influx_query(query):
 #     try:
@@ -109,4 +116,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8085)

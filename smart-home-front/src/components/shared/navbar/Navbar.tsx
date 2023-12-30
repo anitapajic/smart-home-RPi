@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   NavbarStyle,
   Title,
@@ -7,6 +8,8 @@ import {
   Hamburger,
 } from "./Navbar.styled";
 import { Link } from "react-router-dom";
+import Modal from "../modal/Modal";
+import SafetySystemForm from "../../safetySystemForm/SafetySystemForm";
 
 export interface NavbarProps {
   title: string;
@@ -25,10 +28,21 @@ export default function Navbar({
   footerRef,
 }: NavbarProps) {
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+
   const handleContactClick = () => {
     footerRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleSafetySystem = () => {
+    console.log("aaa")
+    setIsModalVisible(true);
+  }
+
+  const handleFormCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <>
@@ -46,6 +60,9 @@ export default function Navbar({
                   if (link.value === "Contact") {
                     handleContactClick();
                   }
+                  if (link.value === "Safety System") {
+                    handleSafetySystem();
+                  }
                   setIsMenuOpen(false);
                 }}
                 to={link.href}
@@ -56,6 +73,9 @@ export default function Navbar({
           ))}
         </Menu>
       </NavbarStyle>
+      <Modal isVisible={isModalVisible} onClose={handleFormCancel}>
+        <SafetySystemForm onSubmit={handleFormCancel}></SafetySystemForm>
+      </Modal>
     </>
   );
 }

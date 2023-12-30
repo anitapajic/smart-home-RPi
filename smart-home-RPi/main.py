@@ -2,6 +2,7 @@ import sys
 import threading
 import time
 import keyboard
+import json
 
 from settings import load_settings
 from components.DHT.dht import run_dht
@@ -18,6 +19,8 @@ from components.RGB.rgb import run_rgb
 from components.BUZZ.buzz import run_db1, run_bb
 from queue import Queue
 from home import Home
+from mqtt import listen_for_mqtt, mqtt, on_message, on_connect
+
 
 print_lock = threading.Lock()
 light_event = threading.Event()
@@ -32,19 +35,13 @@ switch_off1 = threading.Event()
 gdht_queue = Queue()
 rgb_queue = Queue()
 
+
 try:
     import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BCM)
 except:
     pass
 
-
-def alarm_p(event):
-    while True:
-        event.wait()
-        print("..................................")
-        time.sleep(5)
-        event.clear()
 
 
 def ds_button_simulator(switch, switch_off, name, key):
@@ -62,15 +59,18 @@ def run_simulators(stop_event):
     # STOP
     enter_thread = threading.Thread(target=listen_for_stop_command, args=(stop_event,))
     enter_thread.start()
-
     home = Home("1111#")
 
-    enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
-    enter1_thread.start()
-
-    enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, switch_off2, '2', 'n'))
+    enter2_thread = threading.Thread(target=listen_for_mqtt, args=(mqtt, on_connect, on_message, home))
     enter2_thread.start()
-    # # DHT
+
+    #
+    # enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
+    # enter1_thread.start()
+    #
+    # enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, switch_off2, '2', 'n'))
+    # enter2_thread.start()
+    # DHT
     # dht1_settings = settings['DHT1']
     # run_dht(dht1_settings, threads, stop_event, print_lock)
     #

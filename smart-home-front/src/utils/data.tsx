@@ -41,8 +41,9 @@ export const navbarTitle = "Smart Home";
   
   export const menuOptions = [
     { href: "", value: "Home"},
+    { href: "#", value: "Safety System"},
     { href: "/devices", value: "Devices"},
-    { href: "/alarm", value: "Alarm Clock"},
+    { href: "", value: "Alarm Clock"},
     { href: "#", value: "Contact"},
   ];
 
