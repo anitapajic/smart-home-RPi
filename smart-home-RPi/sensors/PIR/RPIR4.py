@@ -6,7 +6,8 @@ except:
     pass
 
 
-def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm):
+def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm,
+             alarm_reason_queue):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(PIR_PIN, GPIO.IN)
 
@@ -17,6 +18,7 @@ def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event,
             with print_lock:
                 alarm.set()
                 home.alarm = True
+                alarm_reason_queue.put("RPIR4 detected unexpected movement.")
     def motion_ended_callback(channel):
         pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 0)
         print("You stopped moving")

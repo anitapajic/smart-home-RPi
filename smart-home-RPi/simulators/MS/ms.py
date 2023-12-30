@@ -1,6 +1,7 @@
 import time
 
-def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event, my_time=None):
+def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event,
+              alarm_reason_queue, my_time=None):
     valid_buttons = {"1", "2", "3", "A", "4", "5", "6", "B", "7", "8", "9", "C", "*", "0", "D", "#"}
     pressed_buttons = []
     wrong_pin = True
@@ -10,6 +11,7 @@ def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home
                 print("too long")
                 ds_event.clear()
                 alarm.set()
+                alarm_reason_queue.put("10 seconds from safety system gone.")
                 wrong_pin = False
 
         with print_lock:
@@ -54,7 +56,8 @@ def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home
                 print("No buttons were pressed during the simulation.")
 
 
-def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event):
+def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event,
+                     alarm_reason_queue):
     while True:
         if stop_event.is_set():
             break
@@ -63,9 +66,11 @@ def simulated_keypad(print_lock, stop_event, settings, publish_event, ms_callbac
 
         if events_triggered[0]:  # ds_event is set
             print("DS PIN")
-            enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event, time.time())
+            enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event,
+                      alarm_reason_queue, time.time())
         elif events_triggered[1]:  # alarm event is set
             print("ALARM PIN")
-            enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event)
+            enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event,
+                      alarm_reason_queue)
 
 

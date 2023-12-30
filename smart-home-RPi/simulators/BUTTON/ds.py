@@ -16,7 +16,7 @@ def toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, ala
     ds_callback(ds.state, print_lock, settings, publish_event)
 
 
-def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off):
+def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off, alarm_reason_queue):
     ds = DS(settings['pin'])
     while True:
         switch.wait()
@@ -28,6 +28,7 @@ def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_even
             if time.time() - ds.time > 5:  # ds.time je timestamp kad se ukljucio
                 alarm_ds.set()
                 home.alarm = True
+                alarm_reason_queue.put("Door opened more than 5 seconds.")
             if switch_off.is_set():
                 toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, alarm_ds)
                 switch.clear()

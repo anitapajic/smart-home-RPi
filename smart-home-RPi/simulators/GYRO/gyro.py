@@ -22,7 +22,7 @@ def detect_unusual_activity(gyro_data, accel_data, gyro_threshold=250.0, accel_t
     return False
 
 
-def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callback, alarm_event):
+def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callback, alarm_event, alarm_reason_queue):
     try:
         gyro_threshold = 250.0  # Prag za žiroskop
         accel_threshold = 1.9  # Prag za akcelerometar
@@ -41,6 +41,7 @@ def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callbac
                 with print_lock:
                     print("Neobična aktivnost detektovana! Aktiviranje alarma.")
                 alarm_event.set()
+                alarm_reason_queue.put("Gyroscope detected unusual activity.")
 
             time.sleep(7)
 

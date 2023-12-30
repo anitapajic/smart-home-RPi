@@ -59,7 +59,7 @@ export const navbarTitle = "Smart Home";
     {type: "IR", url: ""},
     {type: "4SG", url: ""},
     {type: "MS", url: ""},
-
+    {type: "ALARMS", url: "http://localhost:3000/d/f3468363-e6bf-4cbd-b759-1b70aa55206b/alarms?orgId=1&from=1703939618486&to=1703961218487"},
 
   ]
   export const devices = [
@@ -76,25 +76,30 @@ export const navbarTitle = "Smart Home";
     { id : "RPIR3", name: "Room PIR 3", piNumber: 2, type:"PIR"},
     { id : "RPIR4", name: "Room PIR 4", piNumber: 3, type:"PIR"},
 
-    { id : "DUS1", name: "Door Ultrasonic Sensor 1", piNumber: 3, type:"DUS", url: ""},
-    { id : "DUS2", name: "Door Ultrasonic Sensor 2", piNumber: 3, type:"DUS", url: ""},
+    { id : "DUS1", name: "Door Ultrasonic Sensor 1", piNumber: 3, type:"DUS"},
+    { id : "DUS2", name: "Door Ultrasonic Sensor 2", piNumber: 3, type:"DUS"},
 
-    { id : "DS1", name: "Door Sensor 1", piNumber: 3, type:"DS", url: ""},
-    { id : "DS2", name: "Door Sensor 2", piNumber: 3, type:"DS", url: ""},
+    { id : "DS1", name: "Door Sensor 1", piNumber: 3, type:"DS"},
+    { id : "DS2", name: "Door Sensor 2", piNumber: 3, type:"DS"},
 
-    { id : "DL", name: "Door Light", piNumber: 1, type:"DL", url: ""},
+    { id : "DL", name: "Door Light", piNumber: 1, type:"DL"},
 
-    { id : "GLCD", name: "Garage LCD", piNumber: 2, type:"LCD", url: ""},
+    { id : "GLCD", name: "Garage LCD", piNumber: 2, type:"LCD"},
 
-    { id : "GRG", name: "Gun Safe Gyro", piNumber: 2, type:"GYRO", url: ""},
+    { id : "GRG", name: "Gun Safe Gyro", piNumber: 2, type:"GYRO"},
 
-    { id : "BRGB", name: "Bedroom RGB", piNumber: 3, type:"RGB", url: ""},
+    { id : "BRGB", name: "Bedroom RGB", piNumber: 3, type:"RGB"},
 
-    { id : "BIR", name: "Bedroom Infrared", piNumber: 3, type:"IR", url: ""},
+    { id : "BIR", name: "Bedroom Infrared", piNumber: 3, type:"IR"},
 
-    { id : "B4SG", name: "Bedroom 4 Digit 7 Segment Display", piNumber: 3, type:"4SG", url: ""},
+    { id : "B4SG", name: "Bedroom 4 Digit 7 Segment Display", piNumber: 3, type:"4SG"},
 
-    { id : "DMS", name: "Door Membrane Switch", piNumber: 1, type:"MS", url: ""},
+    { id : "DMS", name: "Door Membrane Switch", piNumber: 1, type:"MS"},
+
+    { id : "DB", name: "Door Buzzer", piNumber: 1, type:"ALARMS"},
+    { id : "BB", name: "Bedroom Buzzer", piNumber: 2, type:"ALARMS"},
+
+
 
 
 

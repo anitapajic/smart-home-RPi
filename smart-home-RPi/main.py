@@ -31,6 +31,7 @@ switch_off2 = threading.Event()
 switch_off1 = threading.Event()
 gdht_queue = Queue()
 rgb_queue = Queue()
+alarm_reason_queue = Queue()
 
 try:
     import RPi.GPIO as GPIO
@@ -88,22 +89,22 @@ def run_simulators(stop_event):
 
     # # PIR
     # rpir1_settings = settings['RPIR1']
-    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
-    #
+    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event, alarm_reason_queue)
+
     # rpir2_settings = settings['RPIR2']
-    # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
+    # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event, alarm_reason_queue)
     #
     # rpir3_settings = settings['RPIR3']
-    # run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event)
+    # run_RPIR3(rpir3_settings, threads, stop_event, print_lock, home, alarm_event, alarm_reason_queue)
     #
     # rpir4_settings = settings['RPIR4']
-    # run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
+    # run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event, alarm_reason_queue)
 
     # dpir1_settings = settings['DPIR1']
     # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
     #
     # dpir2_settings = settings['DPIR2']
-    # run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
+    # run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event, light_event)
 
     # DL
     # dl_settings = settings['DL']
@@ -111,10 +112,12 @@ def run_simulators(stop_event):
     #
     # DS
     ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home, switch_off1)
+    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home, switch_off1,
+           alarm_reason_queue)
 
     ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2)
+    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2,
+           alarm_reason_queue)
 
     # # DUS
     # dus1_settings = settings['DUS1']
@@ -126,11 +129,11 @@ def run_simulators(stop_event):
     # # MS
     # dms1_settings = settings['DMS1']
     # run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
-    #
+
 
     # # GYRO
     # grg_settings = settings['GRG']
-    # run_gyro(grg_settings, threads, stop_event, print_lock)
+    # run_gyro(grg_settings, threads, stop_event, print_lock, alarm_reason_queue)
 
     # # LCD
     # glcd_settings = settings["GLCD"]
@@ -142,7 +145,7 @@ def run_simulators(stop_event):
 
     # Buzzer
     db1_settings = settings['DB1']
-    run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
+    run_db1(db1_settings, threads, stop_event, print_lock, alarm_event, alarm_reason_queue)
 
     # # RGB
     # rgb_settings = settings['BRGB']

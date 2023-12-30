@@ -68,7 +68,7 @@ def real_keypad(print_lock, stop_event, settings, publish_event, ms_callback, ho
                                 alarm.clear()
 
                         if not home.alarm:  # ako se pin unosi dok nema alarma to je za postavljanje sigurnosnog sistema (ili izmeni da kad stavi * na kraj da je za ovo)
-                            home.set_pin(code)
+                            home.set_pin(accumulated_keys)
                             home.safety_system = True
 
                         accumulated_keys = ''  # Reset for the next code

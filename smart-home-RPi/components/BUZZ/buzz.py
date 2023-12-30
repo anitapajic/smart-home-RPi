@@ -33,55 +33,61 @@ publisher_thread.daemon = True
 publisher_thread.start()
 
 
-def buzz_callback(settings, publish_event, isOn):
+def buzz_callback(settings, publish_event, reason):
     global publish_data_counter, publish_data_limit
 
     current_time = datetime.utcnow().isoformat()  # Convert current time to ISO 8601 string format
 
     movement_payload = {
-        "measurement": "Buzzers",
+        "measurement": "Alarms",
         "simulated": settings['simulated'],
         "runs_on": settings["runs_on"],
         "name": settings["name"],
-        "value": isOn,
+        "value": reason,
         "timestamp": current_time
     }
 
     with counter_lock:
-        buzz_batch.append(('Buzzers', json.dumps(movement_payload), 0, True))
+        buzz_batch.append(('Alarms', json.dumps(movement_payload), 0, True))
         publish_data_counter += 1
 
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
 
 
-def run_db1(settings, threads, stop_event, print_lock, alarm):
+def run_db1(settings, threads, stop_event, print_lock, alarm, alarm_reason_queue):
     pitch = settings.get('pitch', 440)  # Default to 440 if not set
     duration = settings.get('duration', 1000)  # Default to 1 if not set
 
     if settings['simulated']:
-        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm))
+        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration,
+                                                                           settings, publish_event, buzz_callback,
+                                                                           alarm, alarm_reason_queue))
         buzzer_thread.start()
         threads.append(buzzer_thread)
     else:
         buzzer_pin = settings['pin']
-        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback, alarm))
+        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event,
+                                                               buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
 
 
-def run_bb(settings, threads, stop_event, print_lock):
+def run_bb(settings, threads, stop_event, print_lock, alarm, alarm_reason_queue):
     pitch = settings.get('pitch', 440)  # Default to 440 if not set
     duration = settings.get('duration', 1000)  # Default to 1 if not set
 
     if settings['simulated']:
-        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback))
+        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration,
+                                                                           settings, publish_event, buzz_callback,
+                                                                           alarm, alarm_reason_queue))
         buzzer_thread.start()
         threads.append(buzzer_thread)
     else:
         print("Starting real buzzer")
         buzzer_pin = settings['pin']
-        buzzer_thread = threading.Thread(target=bb_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback))
+        buzzer_thread = threading.Thread(target=bb_loop, args=(buzzer_pin, 440, 1, settings, publish_event,
+                                                               buzz_callback))
         buzzer_thread.start()
         threads.append(buzzer_thread)
         print("Real buzzer started")

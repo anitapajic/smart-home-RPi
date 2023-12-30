@@ -16,7 +16,8 @@ def simulated_no_motion(name, print_lock):
         print("------------------------------------")
 
 
-def simulated_pir(name, print_lock, stop_event, settings, publish_event, callback, home, event, light_event=None):
+def simulated_pir(name, print_lock, stop_event, settings, publish_event, callback, home, event, alarm_reason_queue,
+                  light_event=None):
     try:
         while True:
             if random.randint(-1, 1) > 0:
@@ -26,6 +27,7 @@ def simulated_pir(name, print_lock, stop_event, settings, publish_event, callbac
                     with print_lock:
                         event.set()    # u room pir to je alarm event
                         home.alarm = True
+                        alarm_reason_queue.put("Room PIR detected unexpected movement.")
                 if "Door PIR" in name:
                     event.set()        # u door pir je counter event
             else:

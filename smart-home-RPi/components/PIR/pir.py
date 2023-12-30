@@ -55,91 +55,115 @@ def pir_callback(name, print_lock, stop_event, dht_settings, publish_event, move
         publish_event.set()
 
 
-def run_RPIR1(settings, threads, stop_event, print_lock, home, alarm):
+def run_RPIR1(settings, threads, stop_event, print_lock, home, alarm, alarm_reason_queue):
 
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, alarm,
+                                                                  alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.RPIR1 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, alarm,
+                                                             alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
 
 
-def run_RPIR2(settings, threads, stop_event, print_lock, home, alarm):
+def run_RPIR2(settings, threads, stop_event, print_lock, home, alarm, alarm_reason_queue):
 
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, alarm,
+                                                                  alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.RPIR2 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, alarm,
+                                                             alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
 
 
-def run_DPIR1(settings, threads, stop_event, print_lock, home, event, light_event):
+def run_DPIR1(settings, threads, stop_event, print_lock, home, event, alarm_reason_queue, light_event):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, event, light_event))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, event,
+                                                                  alarm_reason_queue, light_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.DPIR1 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, event, light_event))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, event,
+                                                             alarm_reason_queue, light_event))
         pir_thread.start()
         threads.append(pir_thread)
 
 
-def run_DPIR2(settings, threads, stop_event, print_lock, home, event):
+def run_DPIR2(settings, threads, stop_event, print_lock, home, event, alarm_reason_queue, light_event):
     pir_name = settings['name']
 
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, event))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, event,
+                                                                  alarm_reason_queue, light_event))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.DPIR2 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, event))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, event,
+                                                             alarm_reason_queue, light_event))
         pir_thread.start()
         threads.append(pir_thread)
 
 
-def run_RPIR3(settings, threads, stop_event, print_lock, home, alarm):
+def run_RPIR3(settings, threads, stop_event, print_lock, home, alarm, alarm_reason_queue):
     pir_name = settings['name']
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, alarm,
+                                                                  alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.RPIR3 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, alarm,
+                                                             alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
 
 
-def run_RPIR4(settings, threads, stop_event, print_lock, home, alarm):
+def run_RPIR4(settings, threads, stop_event, print_lock, home, alarm, alarm_reason_queue):
     pir_name = settings['name']
     if settings['simulated']:
-        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=simulated_pir, args=(pir_name, print_lock, stop_event, settings,
+                                                                  publish_event, pir_callback, home, alarm,
+                                                                  alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)
     else:
         from sensors.PIR.RPIR4 import real_pir
         pin = settings['pin']
-        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, alarm))
+        pir_thread = threading.Thread(target=real_pir, args=(pin, pir_name, print_lock, stop_event, settings,
+                                                             publish_event, pir_callback, home, alarm,
+                                                             alarm_reason_queue))
         pir_thread.start()
         threads.append(pir_thread)

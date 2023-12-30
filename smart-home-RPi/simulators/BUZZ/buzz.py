@@ -15,7 +15,7 @@ import time
 #         print(f"Unexpected error: {e}")
 #         time.sleep(10)
 
-def simulated_buzz(pitch, duration, settings, publish_event, buzz_callback):
+def simulated_buzz(pitch, duration):
     try:
         import winsound
         winsound.Beep(pitch, duration)
@@ -23,9 +23,13 @@ def simulated_buzz(pitch, duration, settings, publish_event, buzz_callback):
         print("winsound module is not available on this system.")
         time.sleep(1)
 
-def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm):
+
+def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm,
+                        alarm_reason_queue):
     while not stop_event.is_set():
         alarm.wait()
-        simulated_buzz(pitch, duration, settings, publish_event, buzz_callback)
+        simulated_buzz(pitch, duration)
         if not alarm.is_set():
-            buzz_callback(settings, publish_event, 1)
+            reason = alarm_reason_queue.get()
+            if reason:
+                buzz_callback(settings, publish_event, reason)
