@@ -14,6 +14,7 @@ def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event,
         pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 1)
         if home.people_count == 0:
             alarm.set()
+            home.alarm = True
     def motion_ended_callback(channel):
         pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 0)
         print("You stopped moving")

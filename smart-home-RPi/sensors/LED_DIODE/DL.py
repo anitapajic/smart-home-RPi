@@ -38,7 +38,6 @@ class DL(object):
 def run_dl_loop(callback, stop_event, print_lock, settings, publish_event, light_event):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(settings['button_pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
     dl = DL(settings['pin'])
 
     while True:

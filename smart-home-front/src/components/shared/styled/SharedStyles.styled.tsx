@@ -13,6 +13,13 @@ export const StyledPage = styled.section`
   input {
     text-align: center;
   }
+  P{
+    text-align: center;
+    font-weight: bold;
+    color: ${({ theme }) => theme.colors.textColor};
+    font-size: large;
+    margin-top:30px;
+  }
 `;
 export const HeaderWrapper = styled.div`
   display: flex;

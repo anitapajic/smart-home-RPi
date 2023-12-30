@@ -24,7 +24,6 @@ def db_loop(buzzer_pin, pitch, duration, settings, publish_event, buzz_callback,
             real_buzz(buzzer_pin, pitch, duration)
             time.sleep(1)
             buzz_callback(settings, publish_event, 1)
-            alarm.clear()
     except KeyboardInterrupt:
         GPIO.cleanup()
 

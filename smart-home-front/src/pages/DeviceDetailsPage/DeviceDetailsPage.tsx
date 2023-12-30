@@ -6,7 +6,6 @@ import { StyledPage } from "../../components/shared/styled/SharedStyles.styled";
 export default function DeviceDetailsPage() {
     const { deviceId } = useParams();
 
-    // Find the dashboard URL for the given device type
     const dashboard = urls.find(item => item.type === deviceId);
     const dashboardUrl = dashboard ? dashboard.url : null;
 
