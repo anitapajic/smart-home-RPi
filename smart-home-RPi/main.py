@@ -20,6 +20,8 @@ from components.BUZZ.buzz import run_db1, run_bb
 from queue import Queue
 from home import Home
 from mqtt import listen_for_mqtt, mqtt, on_message, on_connect
+import paho.mqtt.publish as publish
+from broker_settings import HOSTNAME, PORT
 
 
 print_lock = threading.Lock()
@@ -43,7 +45,6 @@ except:
     pass
 
 
-
 def ds_button_simulator(switch, switch_off, name, key):
     while True:
         if not switch.is_set():
@@ -53,16 +54,32 @@ def ds_button_simulator(switch, switch_off, name, key):
             keyboard.wait(key, suppress=True, trigger_on_release=True)
             switch_off.set()
 
+test_batch = []
 
+
+
+def test_alarm(home, event):
+    while True:
+        event.wait()
+        home.alarm = True
+        test_batch.append(('alarm', json.dumps({"a": "a"}), 0, True))
+        publish.multiple(test_batch, hostname=HOSTNAME, port=PORT)
+        time.sleep(2)
 def run_simulators(stop_event):
 
     # STOP
-    enter_thread = threading.Thread(target=listen_for_stop_command, args=(stop_event,))
-    enter_thread.start()
     home = Home("1111#")
 
-    enter2_thread = threading.Thread(target=listen_for_mqtt, args=(mqtt, on_connect, on_message, home))
-    enter2_thread.start()
+    enter_thread = threading.Thread(target=listen_for_stop_command, args=(stop_event,))
+    enter_thread.start()
+
+    mqtt_thread = threading.Thread(target=listen_for_mqtt, args=(mqtt, on_connect, on_message, home, alarm_event))
+    mqtt_thread.start()
+
+    mqtth_thread = threading.Thread(target=test_alarm, args=(home, alarm_event))
+    mqtth_thread.start()
+
+
 
     #
     # enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
@@ -73,7 +90,7 @@ def run_simulators(stop_event):
     # DHT
     # dht1_settings = settings['DHT1']
     # run_dht(dht1_settings, threads, stop_event, print_lock)
-    #
+
     # dht2_settings = settings['DHT2']
     # run_dht(dht2_settings, threads, stop_event, print_lock)
     #
@@ -87,9 +104,9 @@ def run_simulators(stop_event):
     # run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
 
     # # PIR
-    # rpir1_settings = settings['RPIR1']
-    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
-    #
+    rpir1_settings = settings['RPIR1']
+    run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
+
     # rpir2_settings = settings['RPIR2']
     # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
     #
@@ -123,19 +140,19 @@ def run_simulators(stop_event):
     # dus2_settings = settings['DUS2']
     # run_dus(dus2_settings, threads, stop_event, print_lock, home, dus2_event)
 
-    # # MS
+    # MS
     # dms1_settings = settings['DMS1']
     # run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
-    #
+
 
     # # GYRO
     # grg_settings = settings['GRG']
     # run_gyro(grg_settings, threads, stop_event, print_lock)
 
-    # # LCD
+    # LCD
     # glcd_settings = settings["GLCD"]
     # run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
-    #
+
     # # B4SD
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)

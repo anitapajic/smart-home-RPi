@@ -9,7 +9,7 @@ export const Form = styled.form`
   justify-content: center;
   flex-direction: column;
   border-radius: 15px;
-  padding: 0 50px;
+  padding: 0 20px;
   height: 100%;
   text-align: center;
 `;
