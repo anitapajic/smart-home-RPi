@@ -8,7 +8,7 @@ from broker_settings import HOSTNAME, PORT
 
 dht_batch = []
 publish_data_counter = 0
-publish_data_limit = 5
+publish_data_limit = 1
 counter_lock = threading.Lock()
 
 def publisher_task(event, dht_batch):
@@ -37,16 +37,16 @@ def dl_callback(state, print_lock, settings, publish_event):
         print("=" * 20)
         print(f"{settings['name']}")
         print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-        print(f"State: {state}")
+        print(f"State: {int(state)}")
 
     current_time = datetime.utcnow().isoformat()
 
     dl_payload = {
-        "measurement": "Door light",
+        "measurement": "Door light 1",
         "simulated": settings['simulated'],
         "runs_on": settings["runs_on"],
         "name": settings["name"],
-        "value": state,
+        "value": int(state),
         "timestamp": current_time
 
     }
@@ -58,17 +58,16 @@ def dl_callback(state, print_lock, settings, publish_event):
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
 
-def run_dl(settings, threads, stop_event, print_lock):
+def run_dl(settings, threads, stop_event, print_lock, light_event):
     if settings['simulated']:
         dl_thread = threading.Thread(target=run_dl_simulator,
-                                     args=(dl_callback, stop_event, print_lock, settings, publish_event))
+                                     args=(dl_callback, stop_event, print_lock, settings, publish_event, light_event))
         dl_thread.start()
         threads.append(dl_thread)
-        print("Press m to switch light")
     else:
         from sensors.LED_DIODE.DL import run_dl_loop
         dl_thread = threading.Thread(target=run_dl_loop,
-                                     args=(dl_callback, stop_event, print_lock, settings, publish_event))
+                                     args=(dl_callback, stop_event, print_lock, settings, publish_event, light_event))
         dl_thread.start()
         threads.append(dl_thread)
 

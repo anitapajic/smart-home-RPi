@@ -5,12 +5,13 @@ except:
     pass
 
 
-def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event, pir_callback):
+def real_pir(PIR_PIN, pir_name, print_lock, stop_event, settings, publish_event, pir_callback, home, counter):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(PIR_PIN, GPIO.IN)
 
     def motion_detected_callback(channel):
         print("DPIR2 detected movement!")
+        counter.set()
         pir_callback(pir_name, print_lock, stop_event, settings, publish_event, 1)
 
     def motion_ended_callback(channel):

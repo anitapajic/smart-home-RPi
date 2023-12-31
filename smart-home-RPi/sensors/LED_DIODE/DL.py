@@ -12,59 +12,43 @@ class DL(object):
 
 
     def toggle(self):
-        try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.pin, GPIO.OUT)
-        except:
-            pass
         self.state = not self.state  # Toggle the state
 
-    def turnOn(self):
-        try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.pin, GPIO.OUT)
-        except:
-            pass
-        if not self.state:
-            try:
-                GPIO.output(self.pin, GPIO.HIGH)
-            except:
-                pass
+    def turn_on_sim(self):
+        self.state = True
 
+    def turn_off_sim(self):
+        self.state = False
+
+    def turnOn(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
+        if not self.state:
+            GPIO.output(self.pin, GPIO.HIGH)
             self.state = True
 
     def turnOff(self):
-        try:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(self.pin, GPIO.OUT)
-        except:
-            pass
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
         if self.state:
-            try:
-                GPIO.output(self.pin, GPIO.HIGH)
-            except:
-                pass
+            GPIO.output(self.pin, GPIO.LOW)
             self.state = False
 
 
-def run_dl_loop(callback, stop_event, print_lock, settings, publish_event):
+def run_dl_loop(callback, stop_event, print_lock, settings, publish_event, light_event):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(settings['button_pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
     dl = DL(settings['pin'])
-    def button_callback(channel):
-        dl.toggle()  # Toggle the door light
-        if dl.state:
-            dl.turnOn()
-            callback(True, print_lock, settings, publish_event)
-        else:
-            dl.turnOff()
-            callback(False, print_lock, settings, publish_event)
-
-    # Add an interrupt for the button press
-    GPIO.add_event_detect(settings['button_pin'], GPIO.FALLING, callback=button_callback, bouncetime=200)
 
     while True:
+        light_event.wait()
+        if dl.state:
+            dl.turnOn()
+            time.sleep(10)
+            dl.turnOff()
+        callback(dl.state, print_lock, settings, publish_event)
+        light_event.clear()
+
         if stop_event.is_set():
             dl.turnOff()  # Ensure the light is off when stopping
             callback(False, print_lock, settings, publish_event)

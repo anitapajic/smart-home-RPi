@@ -44,12 +44,23 @@ class DUS(object):
         distance = (pulse_duration * 34300)/2
         return distance
 
-def run_dus_loop(delay, callback, stop_event, print_lock, settings, publish_event):
+def run_dus_loop(delay, callback, stop_event, print_lock, settings, publish_event, home, event ):
     dus = DUS(settings["trig_pin"], settings["echo_pin"])
-
     while True:
         distance = dus.get_distance()
         callback(distance, print_lock, settings, publish_event)
+
+        event.wait()
+        new_distance = dus.get_distance()
+        if new_distance < distance:
+            with print_lock:
+                home.inc_counter()
+        else:
+            with print_lock:
+                home.dec_counter()
+        callback(new_distance, print_lock, settings, publish_event)
+        event.clear()
+
         if stop_event.is_set():
             break
         time.sleep(delay)

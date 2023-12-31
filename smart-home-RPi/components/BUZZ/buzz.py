@@ -10,7 +10,7 @@ from broker_settings import HOSTNAME, PORT
 
 buzz_batch = []
 publish_data_counter = 0
-publish_data_limit = 3
+publish_data_limit = 1
 counter_lock = threading.Lock()
 
 
@@ -47,7 +47,6 @@ def buzz_callback(settings, publish_event, isOn):
         "timestamp": current_time
     }
 
-    print(movement_payload)
     with counter_lock:
         buzz_batch.append(('Buzzers', json.dumps(movement_payload), 0, True))
         publish_data_counter += 1
@@ -56,21 +55,19 @@ def buzz_callback(settings, publish_event, isOn):
         publish_event.set()
 
 
-def run_db1(settings, threads, stop_event, print_lock):
+def run_db1(settings, threads, stop_event, print_lock, alarm):
     pitch = settings.get('pitch', 440)  # Default to 440 if not set
     duration = settings.get('duration', 1000)  # Default to 1 if not set
 
     if settings['simulated']:
-        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback))
+        buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
     else:
-        print("Starting real buzzer")
         buzzer_pin = settings['pin']
-        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback))
+        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
-        print("Real buzzer started")
 
 
 def run_bb(settings, threads, stop_event, print_lock):

@@ -56,16 +56,16 @@ def lcd_callback(message, print_lock, settings, publish_event):
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
 
-def run_lcd(settings, threads, stop_event, print_lock):
+def run_lcd(settings, threads, stop_event, print_lock, queue):
     if settings['simulated']:
         lcd_thread = threading.Thread(target=run_lcd_simulator,
-                                      args=(lcd_callback, stop_event, print_lock, settings, publish_event))
+                                      args=(lcd_callback, stop_event, print_lock, settings, publish_event, queue))
         lcd_thread.start()
         threads.append(lcd_thread)
     else:
         from sensors.LCD.GLCD import run_lcd_loop
         lcd_thread = threading.Thread(target=run_lcd_loop,
-                                      args=(lcd_callback, stop_event, print_lock, settings, publish_event))
+                                      args=(lcd_callback, stop_event, print_lock, settings, publish_event, queue))
         lcd_thread.start()
         threads.append(lcd_thread)
 

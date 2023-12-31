@@ -34,14 +34,14 @@ publisher_thread.start()
 def dht_callback(humidity, temperature, code, print_lock, settings, publish_event):
     global publish_data_counter, publish_data_limit
 
-    # with print_lock:
-    #     t = time.localtime()
-    #     print("=" * 20)
-    #     print(f"DHT: {settings['name']}")
-    #     print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
-    #     print(f"Code: {code}")
-    #     print(f"Humidity: {humidity}%")
-    #     print(f"Temperature: {temperature}°C")
+    with print_lock:
+        t = time.localtime()
+        print("=" * 20)
+        print(f"DHT: {settings['name']}")
+        print(f"Timestamp: {time.strftime('%H:%M:%S', t)}")
+        print(f"Code: {code}")
+        print(f"Humidity: {humidity}%")
+        print(f"Temperature: {temperature}°C")
 
     current_time = datetime.utcnow().isoformat()
 
@@ -73,16 +73,16 @@ def dht_callback(humidity, temperature, code, print_lock, settings, publish_even
         publish_event.set()
 
 
-def run_dht(settings, threads, stop_event, print_lock):
+def run_dht(settings, threads, stop_event, print_lock, queue=None):
     if settings['simulated']:
         dht_thread = threading.Thread(target=run_dht_simulator,
-                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
+                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event, queue))
         dht_thread.start()
         threads.append(dht_thread)
     else:
         from sensors.DHT.DHT import run_dht_loop
         dht_thread = threading.Thread(target=run_dht_loop,
-                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event))
+                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event, queue))
         dht_thread.start()
         threads.append(dht_thread)
 
