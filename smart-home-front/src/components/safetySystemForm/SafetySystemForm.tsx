@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { showToast } from "../shared/toast/CustomToast";
 import { CustomInput, Form } from "./SafetySystem.styled";
-import Service from "../../services/Service";
 import { ButtonStyled } from "../shared/button/Button.styled";
 
 export type SafetySystemFormProps = {
@@ -46,8 +44,6 @@ export default function SafetySystemForm({ isAlarm, onSubmit }: SafetySystemForm
 
     return <Form>
         {isLoading ? (
-
-
             <iframe
                 src="https://giphy.com/embed/JFTg9PBtHZz9hHRkBN"
                 width="100%"

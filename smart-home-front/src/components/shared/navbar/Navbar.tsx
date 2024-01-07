@@ -12,6 +12,7 @@ import Modal from "../modal/Modal";
 import SafetySystemForm from "../../safetySystemForm/SafetySystemForm";
 import { Socket, io } from "socket.io-client";
 import Service from "../../../services/Service";
+import AlarmClockForm from "../../alarmClockForm/AlarmClockForm";
 
 export interface NavbarProps {
   title: string;
@@ -31,7 +32,11 @@ export default function Navbar({
 }: NavbarProps) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisibleClock, setIsModalVisibleClock] = useState(false);
+
   const [isAlarm, setIsAlarm] = useState(true);
+  const [isClockOn, setIsClockOn] = useState(true);
+
   const [socket, setSocket] = useState<Socket | null>(null);
 
 
@@ -44,6 +49,7 @@ export default function Navbar({
 
       // Subscribe to the "/alarm" topic
       socket.emit("subscribe", "alarm");
+      socket.emit("subscribe", "clock");
     });
 
     socket.on("disconnect", () => {
@@ -51,16 +57,29 @@ export default function Navbar({
     });
 
     socket.on("alarm_message", (message) => {
-      if(!isModalVisible){
+      if (!isModalVisible) {
         setIsAlarm(true)
         setIsModalVisible(true);
       }
-     
+
+    });
+
+    socket.on("clock_message", (message) => {
+      if (!isModalVisibleClock) {
+        setIsClockOn(true)
+        setIsModalVisibleClock(true);
+      }
+
     });
 
     socket.on("alarm_off_message", (message) => {
       setIsAlarm(false)
       setIsModalVisible(false);
+    });
+
+    socket.on("clock_off_message", (message) => {
+      setIsClockOn(false)
+      setIsModalVisibleClock(false);
     });
 
     setSocket(socket);
@@ -72,22 +91,22 @@ export default function Navbar({
   }, []);
 
 
-  const handlePinEnter = (pin : string) => {
-    if(isAlarm){
+  const handlePinEnter = (pin: string) => {
+    if (isAlarm) {
       Service.deactivateAlarm(pin).then(response => {
       }).catch(error => {
-          console.error("Error: ", error)
+        console.error("Error: ", error)
       })
-  }else{
+    } else {
       Service.setSafetySystem(pin).then(response => {
-          console.log(response.data)
-          setIsModalVisible(false)
+        console.log(response.data)
+        setIsModalVisible(false)
 
       }).catch(error => {
-          console.error("Error: ", error)
+        console.error("Error: ", error)
       })
+    }
   }
-}
 
   const handleContactClick = () => {
     footerRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -101,6 +120,37 @@ export default function Navbar({
   const handleFormCancel = () => {
     setIsModalVisible(false);
     setIsAlarm(true)
+  };
+
+  const handleAlarmClock = () => {
+    setIsModalVisibleClock(true);
+    setIsClockOn(false)
+  }
+  const handleClockCancel = () => {
+    setIsModalVisibleClock(false);
+    setIsClockOn(true);
+  };
+
+  const handleAlarmClockEnter = (time?: string) => {
+    if (isClockOn) {
+      Service.turnOffAlarmClock().then(response => {
+        console.log(response.data);
+        setIsModalVisibleClock(false);
+      }).catch(error => {
+        console.error("Error: ", error)
+      })
+    }
+    else {
+      if(time){
+        Service.setAlarmClock(time).then(response => {
+          console.log(response.data);
+          setIsModalVisibleClock(false);
+        }).catch(error => {
+          console.error("Error: ", error)
+        })
+      }   
+    }
+
   };
 
   return (
@@ -122,6 +172,9 @@ export default function Navbar({
                   if (link.value === "Safety System") {
                     handleSafetySystem();
                   }
+                  if (link.value === "Alarm Clock") {
+                    handleAlarmClock();
+                  }
                   setIsMenuOpen(false);
                 }}
                 to={link.href}
@@ -134,6 +187,9 @@ export default function Navbar({
       </NavbarStyle>
       <Modal isVisible={isModalVisible} onClose={handleFormCancel}>
         <SafetySystemForm onSubmit={handlePinEnter} isAlarm={isAlarm}></SafetySystemForm>
+      </Modal>
+      <Modal isVisible={isModalVisibleClock} onClose={handleClockCancel}>
+        <AlarmClockForm onSubmit={handleAlarmClockEnter} isClockOn={isClockOn}></AlarmClockForm>
       </Modal>
     </>
   );

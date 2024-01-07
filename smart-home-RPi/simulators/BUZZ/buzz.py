@@ -25,7 +25,9 @@ def simulated_buzz(pitch, duration, settings, publish_event, buzz_callback):
 #         print("winsound module is not available on this system.")
 #         time.sleep(1)
 
-def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm):
+
+def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm,
+                        alarm_clock_event=None):
     while not stop_event.is_set():
         alarm.wait()
         simulated_buzz(pitch, duration, settings, publish_event, buzz_callback)

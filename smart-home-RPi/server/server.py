@@ -31,9 +31,11 @@ influxdb_client = InfluxDBClient(url=url, token=token, org=org)
 def handle_connect():
     print('Client connected')
 
+
 @socketio.on('disconnect')
 def handle_disconnect():
     print('Client disconnected')
+
 
 # Function to send alarm message to the client
 def send_alarm_message_ws(topic, message):
@@ -42,6 +44,11 @@ def send_alarm_message_ws(topic, message):
     except Exception as e:
         print(e)
 
+def send_alarm_clock_message_ws(topic, message):
+    try:
+        socketio.emit(topic, message)
+    except Exception as e:
+        print(e)
 
 
 # MQTT Configuration
@@ -64,22 +71,29 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("RGB")
     client.subscribe("IR")
     client.subscribe('alarm')
+    client.subscribe('clock')
 
 
 mqtt_client.on_connect = on_connect
+
+
 def on_message_handler(client, userdata, msg):
     if msg.topic == 'alarm':
         send_alarm_message_ws('alarm_message', json.loads(msg.payload.decode('utf-8')))
     elif msg.topic == 'Buzzers':
+        # TODO : Treba da salje i za budilnik da se ugasi
         send_alarm_message_ws('alarm_off_message', json.loads(msg.payload.decode('utf-8')))
-
         save_to_db(json.loads(msg.payload.decode('utf-8')))
-
+    elif msg.topic == 'clock':
+        send_alarm_message_ws('clock_message', json.loads(msg.payload.decode('utf-8')))
     else:
         save_to_db(json.loads(msg.payload.decode('utf-8')))
 
+
 # Assign the on_message handler
 mqtt_client.on_message = on_message_handler
+
+
 def save_to_db(data):
     write_api = influxdb_client.write_api(write_options=SYNCHRONOUS)
     timestamp = datetime.fromisoformat(data["timestamp"]) if "timestamp" in data else datetime.utcnow()
@@ -95,10 +109,10 @@ def save_to_db(data):
     write_api.write(bucket=bucket, org=org, record=point)
 
 
-
 @app.route('/')
 def home():
     return f"Secret Key: {token}"
+
 
 # Route to store dummy data
 @app.route('/safety_system/<string:pin>', methods=['PUT'])
@@ -114,6 +128,7 @@ def safety_system(pin):
     except Exception as e:
         return jsonify({"response": "error - " + str(e)})
 
+
 @app.route('/deactivate_alarm/<string:pin>', methods=['PUT'])
 def deactivate_alarm(pin):
     try:
@@ -126,6 +141,36 @@ def deactivate_alarm(pin):
         return jsonify({"response": "Alarm deactivated " + pin})
     except Exception as e:
         return jsonify({"response": "error - " + str(e)})
+
+
+@app.route('/set_alarm_clock/<string:time>', methods=['PUT'])
+def alarm_clock(time):
+    try:
+        print(time, "set alarm clock ============")
+        # format string-a: 2024-01-10T23:38
+        try:
+            mqtt_client.publish("alarm_clock",  time)
+            print(time)
+        except Exception as e:
+            print(e)
+        # pin treba proslediti preko mqtt simulatoru
+        return jsonify({"response": "Alarm Clock set " + time})
+    except Exception as e:
+        return jsonify({"response": "error - " + str(e)})
+
+
+@app.route('/deactivate_alarm_clock', methods=['GET'])
+def deactivate_alarm_clock():
+    try:
+        try:
+            mqtt_client.publish("turn_off_clock",  True)
+        except Exception as e:
+            print(e)
+        # pin treba proslediti preko mqtt simulatoru
+        return jsonify({"response": "Alarm clock turned off "})
+    except Exception as e:
+        return jsonify({"response": "error - " + str(e)})
+
 
 #
 # def handle_influx_query(query):

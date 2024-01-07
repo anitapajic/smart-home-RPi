@@ -3,7 +3,7 @@ import threading
 import time
 import keyboard
 import json
-
+from datetime import datetime
 from settings import load_settings
 from components.DHT.dht import run_dht
 from components.BUTTON.ds import run_ds
@@ -36,6 +36,7 @@ switch_off2 = threading.Event()
 switch_off1 = threading.Event()
 gdht_queue = Queue()
 rgb_queue = Queue()
+alarm_clock_event = threading.Event()
 
 
 try:
@@ -54,8 +55,8 @@ def ds_button_simulator(switch, switch_off, name, key):
             keyboard.wait(key, suppress=True, trigger_on_release=True)
             switch_off.set()
 
-test_batch = []
 
+test_batch = []
 
 
 def test_alarm(home, event):
@@ -65,6 +66,24 @@ def test_alarm(home, event):
         test_batch.append(('alarm', json.dumps({"a": "a"}), 0, True))
         publish.multiple(test_batch, hostname=HOSTNAME, port=PORT)
         time.sleep(2)
+
+
+clock_batch = []
+
+
+def check_alarm(home, alarm_clock_event):
+    while True:
+        if home.alarm_clock:
+            alarm_time = datetime.strptime(home.alarm_clock, "%Y-%m-%dT%H:%M")
+            current_time = datetime.now()
+            if current_time == alarm_time:
+                alarm_clock_event.set()
+                clock_batch.append(('clock', json.dumps({"a": "a"}), 0, True))
+                publish.multiple(clock_batch, hostname=HOSTNAME, port=PORT)
+                time.sleep(2)
+        time.sleep(1)
+
+
 def run_simulators(stop_event):
 
     # STOP
@@ -73,24 +92,26 @@ def run_simulators(stop_event):
     enter_thread = threading.Thread(target=listen_for_stop_command, args=(stop_event,))
     enter_thread.start()
 
-    mqtt_thread = threading.Thread(target=listen_for_mqtt, args=(mqtt, on_connect, on_message, home, alarm_event))
+    mqtt_thread = threading.Thread(target=listen_for_mqtt, args=(mqtt, on_connect, on_message, home, alarm_event,
+                                                                 alarm_clock_event))
     mqtt_thread.start()
 
     mqtth_thread = threading.Thread(target=test_alarm, args=(home, alarm_event))
     mqtth_thread.start()
 
+    clock_thread = threading.Thread(target=check_alarm, args=(home, alarm_clock_event))
+    clock_thread.start()
 
+    enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
+    enter1_thread.start()
 
-    #
-    # enter1_thread = threading.Thread(target=ds_button_simulator, args=(switch1_event, switch_off1, '1', 'm'))
-    # enter1_thread.start()
-    #
-    # enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, switch_off2, '2', 'n'))
-    # enter2_thread.start()
+    enter2_thread = threading.Thread(target=ds_button_simulator, args=(switch2_event, switch_off2, '2', 'n'))
+    enter2_thread.start()
+
     # DHT
     # dht1_settings = settings['DHT1']
     # run_dht(dht1_settings, threads, stop_event, print_lock)
-
+    #
     # dht2_settings = settings['DHT2']
     # run_dht(dht2_settings, threads, stop_event, print_lock)
     #
@@ -103,9 +124,9 @@ def run_simulators(stop_event):
     # gdht_settings = settings['GDHT']
     # run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
 
-    # # PIR
-    rpir1_settings = settings['RPIR1']
-    run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
+    # PIR
+    # rpir1_settings = settings['RPIR1']
+    # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
 
     # rpir2_settings = settings['RPIR2']
     # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
@@ -115,7 +136,7 @@ def run_simulators(stop_event):
     #
     # rpir4_settings = settings['RPIR4']
     # run_RPIR4(rpir4_settings, threads, stop_event, print_lock, home, alarm_event)
-
+    #
     # dpir1_settings = settings['DPIR1']
     # run_DPIR1(dpir1_settings, threads, stop_event, print_lock, home, dus1_event, light_event)
     #
@@ -125,15 +146,15 @@ def run_simulators(stop_event):
     # DL
     # dl_settings = settings['DL']
     # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
-    #
+
     # DS
-    ds1_settings = settings['DS1']
-    run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home, switch_off1)
+    # ds1_settings = settings['DS1']
+    # run_ds(ds1_settings, threads, stop_event, print_lock, alarm_event, switch1_event, ds_event, home, switch_off1)
+    #
+    # ds2_settings = settings['DS2']
+    # run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2)
 
-    ds2_settings = settings['DS2']
-    run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2)
-
-    # # DUS
+    # DUS
     # dus1_settings = settings['DUS1']
     # run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
     #
@@ -144,22 +165,24 @@ def run_simulators(stop_event):
     # dms1_settings = settings['DMS1']
     # run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
 
-
-    # # GYRO
+    # GYRO
     # grg_settings = settings['GRG']
-    # run_gyro(grg_settings, threads, stop_event, print_lock)
-
-    # LCD
+    # run_gyro(grg_settings, threads, stop_event, print_lock, alarm_event)
+    #
+    # # LCD
     # glcd_settings = settings["GLCD"]
     # run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
 
-    # # B4SD
+    # B4SD
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
 
     # Buzzer
     db1_settings = settings['DB1']
     run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
+
+    # db1_settings = settings['BB']
+    # run_bb(db1_settings, threads, stop_event, print_lock, alarm_event, alarm_clock_event)
 
     # # RGB
     # rgb_settings = settings['BRGB']
