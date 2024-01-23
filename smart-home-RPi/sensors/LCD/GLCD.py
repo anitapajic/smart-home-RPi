@@ -19,14 +19,14 @@ class LCD(object):
                 exit(1)
 
         self.lcd = Adafruit_CharLCD(pin_rs=0, pin_e=2, pins_db=[4, 5, 6, 7], GPIO=self.mcp)
-        self.message = ""
+        self.current_message = ""
 
     def display(self):
         self.mcp.output(3, 1)  # turn on LCD backlight
         self.lcd.begin(20, 2)  # set number of LCD lines and columns
-        # lcd.clear()
+        lcd.clear()
         self.lcd.setCursor(0, 0)  # set cursor position
-        self.lcd.message(self.message)
+        self.lcd.message(self.current_message)
 
     def destroy(self):
         self.lcd.clear()
@@ -36,15 +36,15 @@ def run_lcd_loop(callback, stop_event, print_lock, settings, publish_event, queu
     lcd = LCD()
     while True:
         h, t = queue.get()
-        lcd.message = f"Temperature: {t} °C\nHumidity: {h}%"
+        lcd.current_message = f"Temperature: {t} °C\nHumidity: {h}%"
         lcd.display()
-        callback(lcd.message, print_lock, settings, settings, publish_event)
+        callback(lcd.current_message, print_lock, settings, settings, publish_event)
 
         if stop_event.is_set():
             lcd.destroy()
             break
         sleep(0.1)
-
+    lcd.destroy()
 
 class PCF8574_I2C(object):
     OUPUT = 0

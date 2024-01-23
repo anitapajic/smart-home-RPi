@@ -178,7 +178,7 @@ def run_simulators(stop_event):
     #
     # # B4SD
     # b4sd_settings = settings["B4SD"]
-    # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
+    #  run_b4sd(b4sd_settings, threads, stop_event, print_lock, alarm_clock_event)
     #
     # # Buzzer
     # db1_settings = settings['DB1']
