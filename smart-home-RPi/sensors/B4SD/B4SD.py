@@ -32,7 +32,7 @@ num = {' ': (0, 0, 0, 0, 0, 0, 0),
        '9': (1, 1, 1, 1, 0, 1, 1)}
 
 
-def run_b4sd_loop(callback, stop_event, print_lock, settings, publish_event):
+def run_b4sd_loop(callback, stop_event, print_lock, settings, publish_event, alarm_event):
     try:
         while True:
             n = time.ctime()[11:13] + time.ctime()[14:16]
@@ -46,9 +46,14 @@ def run_b4sd_loop(callback, stop_event, print_lock, settings, publish_event):
                         GPIO.output(25, 1)
                     else:
                         GPIO.output(25, 0)
-                GPIO.output(digits[digit], 0)
-                time.sleep(0.001)
-                GPIO.output(digits[digit], 1)
+                if (int(time.ctime()[18:19]) % 2 == 0) and (alarm_event.is_set()):
+                    GPIO.output(digits[digit], 0)
+                    time.sleep(0.5)
+                    GPIO.output(digits[digit], 1)
+                else:
+                    GPIO.output(digits[digit], 0)
+                    time.sleep(0.001)
+                    GPIO.output(digits[digit], 1)
             if stop_event.is_set():
                 break
     finally:

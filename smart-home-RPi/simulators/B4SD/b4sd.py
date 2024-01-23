@@ -10,9 +10,9 @@ def generate_values():
         yield s
 
 
-def run_b4sd_simulator(callback, stop_event, print_lock, settings, publish_event):
+def run_b4sd_simulator(callback, stop_event, print_lock, settings, publish_event, alarm_event):
     for message in generate_values():
         time.sleep(1)
-        callback(message, print_lock, settings, publish_event)
+        callback(message, print_lock, settings, publish_event, alarm_event)
         if stop_event.is_set():
             break

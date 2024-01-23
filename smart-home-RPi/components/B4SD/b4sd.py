@@ -29,7 +29,7 @@ publisher_thread = threading.Thread(target=publisher_task, args=(publish_event, 
 publisher_thread.daemon = True
 publisher_thread.start()
 
-def b4sd_callback(message, print_lock, settings, publish_event):
+def b4sd_callback(message, print_lock, settings, publish_event, alarm_event):
     global publish_data_counter, publish_data_limit
 
     with print_lock:
@@ -56,16 +56,16 @@ def b4sd_callback(message, print_lock, settings, publish_event):
     if publish_data_counter >= publish_data_limit:
         publish_event.set()
 
-def run_b4sd(settings, threads, stop_event, print_lock):
+def run_b4sd(settings, threads, stop_event, print_lock, alarm_event):
     if settings['simulated']:
         b4sd_thread = threading.Thread(target=run_b4sd_simulator,
-                                      args=(b4sd_callback, stop_event, print_lock, settings, publish_event))
+                                      args=(b4sd_callback, stop_event, print_lock, settings, publish_event, alarm_event))
         b4sd_thread.start()
         threads.append(b4sd_thread)
     else:
         from sensors.B4SD.B4SD import run_b4sd_loop
         b4sd_thread = threading.Thread(target=run_b4sd_loop,
-                                      args=(b4sd_callback, stop_event, print_lock, settings, publish_event))
+                                      args=(b4sd_callback, stop_event, print_lock, settings, publish_event, alarm_event))
         b4sd_thread.start()
         threads.append(b4sd_thread)
 
