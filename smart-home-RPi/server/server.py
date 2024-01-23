@@ -70,6 +70,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("LCD")
     client.subscribe("RGB")
     client.subscribe("IR")
+    client.subscribe("B4SD")
     client.subscribe('alarm')
     client.subscribe('clock')
 
@@ -79,9 +80,9 @@ mqtt_client.on_connect = on_connect
 
 def on_message_handler(client, userdata, msg):
     if msg.topic == 'alarm':
+        print("alaaaarm")
         send_alarm_message_ws('alarm_message', json.loads(msg.payload.decode('utf-8')))
     elif msg.topic == 'Buzzers':
-        # TODO : Treba da salje i za budilnik da se ugasi
         send_alarm_message_ws('alarm_off_message', json.loads(msg.payload.decode('utf-8')))
         save_to_db(json.loads(msg.payload.decode('utf-8')))
     elif msg.topic == 'clock':

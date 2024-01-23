@@ -35,6 +35,7 @@ export const ButtonStyled = styled.button`
   border-radius: 20px;
   border: 1px solid ${({ theme }) => theme.colors.secondColor};
   cursor: pointer;
+  padding: 10px;
 
 
   &:hover{

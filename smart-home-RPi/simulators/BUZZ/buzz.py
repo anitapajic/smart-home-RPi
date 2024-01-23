@@ -27,7 +27,7 @@ def simulated_buzz(pitch, duration, settings, publish_event, buzz_callback):
 
 
 def listen_for_keypress(stop_event, print_lock, pitch, duration, settings, publish_event, buzz_callback, alarm,
-                        alarm_clock_event=None):
+                        alarm_clock_event):
     while not stop_event.is_set():
         events_triggered = [alarm.wait(timeout=1), alarm_clock_event.wait(timeout=1)]
         if events_triggered[0]:

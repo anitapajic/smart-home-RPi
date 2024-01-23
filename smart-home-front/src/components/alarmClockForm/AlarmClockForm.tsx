@@ -24,7 +24,7 @@ export default function AlarmClockForm({ isClockOn, onSubmit }: AlarmClockFormPr
     const handleDecline = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         onSubmit();
-        
+
     }
 
     return (

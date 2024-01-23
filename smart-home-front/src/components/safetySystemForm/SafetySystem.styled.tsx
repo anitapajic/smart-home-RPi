@@ -12,6 +12,7 @@ export const Form = styled.form`
   padding: 0 20px;
   height: 100%;
   text-align: center;
+  margin-top: 20px;
 `;
 export const CustomInput = styled.input`
   background-color: #eee;
