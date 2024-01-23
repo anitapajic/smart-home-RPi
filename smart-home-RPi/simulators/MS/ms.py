@@ -1,5 +1,6 @@
 import time
 
+
 def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event, my_time=None):
     valid_buttons = {"1", "2", "3", "A", "4", "5", "6", "B", "7", "8", "9", "C", "*", "0", "D", "#"}
     pressed_buttons = []
@@ -44,7 +45,6 @@ def enter_pin(print_lock, stop_event, settings, publish_event, ms_callback, home
                 else:
                     print("=========WRONG PIN=========")
                     pressed_buttons = []
-
 
             ms_callback(print_lock, stop_event, settings, publish_event, code)
             with print_lock:

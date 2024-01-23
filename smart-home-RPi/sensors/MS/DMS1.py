@@ -29,6 +29,7 @@ def setup_gpio():
     GPIO.setup(C3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(C4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
+
 # Function to read a single line
 def read_line(line, characters):
     GPIO.output(line, GPIO.HIGH)
@@ -41,6 +42,7 @@ def read_line(line, characters):
     if GPIO.input(C4) == 1:
         print(characters[3])
     GPIO.output(line, GPIO.LOW)
+
 
 # Function to read from the keypad
 def real_keypad(print_lock, stop_event, settings, publish_event, ms_callback, home, alarm, ds_event):
@@ -68,7 +70,7 @@ def real_keypad(print_lock, stop_event, settings, publish_event, ms_callback, ho
                                 alarm.clear()
 
                         if not home.alarm:  # ako se pin unosi dok nema alarma to je za postavljanje sigurnosnog sistema (ili izmeni da kad stavi * na kraj da je za ovo)
-                            home.set_pin(code)
+                            home.set_pin(accumulated_keys)
                             home.safety_system = True
 
                         accumulated_keys = ''  # Reset for the next code

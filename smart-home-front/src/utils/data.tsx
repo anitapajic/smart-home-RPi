@@ -43,7 +43,7 @@ export const navbarTitle = "Smart Home";
     { href: "", value: "Home"},
     { href: "#", value: "Safety System"},
     { href: "/devices", value: "Devices"},
-    { href: "", value: "Alarm Clock"},
+    { href: "/", value: "Alarm Clock"},
     { href: "#", value: "Contact"},
   ];
 

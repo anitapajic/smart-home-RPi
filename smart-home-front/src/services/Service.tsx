@@ -11,6 +11,14 @@ class Service{
         return customAxios.put(`/deactivate_alarm/${pin}`);
     }
 
+    setAlarmClock(time : string) {
+        return customAxios.put(`/set_alarm_clock/${time}`);
+    }
+
+    turnOffAlarmClock() {
+        return customAxios.get(`/deactivate_alarm_clock`);
+    }
+
 }
 
 export default new Service();
