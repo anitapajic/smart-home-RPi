@@ -20,6 +20,7 @@ def on_message(client, userdata, msg):
 
         home = userdata['home']
         alarm = userdata['alarm']
+        clock = userdata['clock']
         if msg.topic == 'safety_system':
             time.sleep(10)
             home.set_pin(str(json.loads(payload_str)) + "#")
@@ -41,6 +42,7 @@ def on_message(client, userdata, msg):
                 print(f"Error processing 'alarm_clock' message: {str(e)}")
         elif msg.topic == 'turn_off_clock':
             home.alarm_clock = None
+            clock.clear()
         # Process the received data as needed
     except json.JSONDecodeError as e:
         print(f"Error decoding MQTT message: {str(e)}")
@@ -49,7 +51,7 @@ def on_message(client, userdata, msg):
 def listen_for_mqtt(mqtt, on_connect, on_message, home, alarm, clock):
     # Set up the MQTT client
     try:
-        mqtt_client_simulator = mqtt.Client(userdata={'home': home, 'alarm': alarm})
+        mqtt_client_simulator = mqtt.Client(userdata={'home': home, 'alarm': alarm, 'clock' : clock})
         mqtt_client_simulator.on_connect = on_connect
         mqtt_client_simulator.on_message = on_message
 

@@ -76,7 +76,10 @@ def check_alarm(home, alarm_clock_event):
         if home.alarm_clock:
             alarm_time = datetime.strptime(home.alarm_clock, "%Y-%m-%dT%H:%M")
             current_time = datetime.now()
-            if current_time == alarm_time:
+            formatted_time = current_time.strftime("%Y-%m-%dT%H:%M")
+            formatted_time = datetime.strptime(formatted_time, "%Y-%m-%dT%H:%M")
+            print(formatted_time, alarm_time)
+            if formatted_time == alarm_time:
                 alarm_clock_event.set()
                 clock_batch.append(('clock', json.dumps({"a": "a"}), 0, True))
                 publish.multiple(clock_batch, hostname=HOSTNAME, port=PORT)
@@ -123,11 +126,11 @@ def run_simulators(stop_event):
     #
     # gdht_settings = settings['GDHT']
     # run_dht(gdht_settings, threads, stop_event, print_lock, gdht_queue)
-
-    # PIR
+    #
+    # # PIR
     # rpir1_settings = settings['RPIR1']
     # run_RPIR1(rpir1_settings, threads, stop_event, print_lock, home, alarm_event)
-
+    #
     # rpir2_settings = settings['RPIR2']
     # run_RPIR2(rpir2_settings, threads, stop_event, print_lock, home, alarm_event)
     #
@@ -142,8 +145,8 @@ def run_simulators(stop_event):
     #
     # dpir2_settings = settings['DPIR2']
     # run_DPIR2(dpir2_settings, threads, stop_event, print_lock, home, dus2_event)
-
-    # DL
+    #
+    # # DL
     # dl_settings = settings['DL']
     # run_dl(dl_settings, threads, stop_event, print_lock, light_event)
 
@@ -153,8 +156,8 @@ def run_simulators(stop_event):
     #
     # ds2_settings = settings['DS2']
     # run_ds(ds2_settings, threads, stop_event, print_lock, alarm_event, switch2_event, ds_event, home, switch_off2)
-
-    # DUS
+    #
+    # # DUS
     # dus1_settings = settings['DUS1']
     # run_dus(dus1_settings, threads, stop_event, print_lock, home, dus1_event)
     #
@@ -165,32 +168,32 @@ def run_simulators(stop_event):
     # dms1_settings = settings['DMS1']
     # run_keypad(dms1_settings, threads, stop_event, print_lock, home, alarm_event, ds_event)
 
-    # GYRO
+    # # GYRO
     # grg_settings = settings['GRG']
     # run_gyro(grg_settings, threads, stop_event, print_lock, alarm_event)
     #
     # # LCD
     # glcd_settings = settings["GLCD"]
     # run_lcd(glcd_settings, threads, stop_event, print_lock, gdht_queue)
-
-    # B4SD
+    #
+    # # B4SD
     # b4sd_settings = settings["B4SD"]
     # run_b4sd(b4sd_settings, threads, stop_event, print_lock)
-
-    # Buzzer
-    db1_settings = settings['DB1']
-    run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
-
-    # db1_settings = settings['BB']
-    # run_bb(db1_settings, threads, stop_event, print_lock, alarm_event, alarm_clock_event)
-
-    # # RGB
-    # rgb_settings = settings['BRGB']
-    # run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
     #
-    # # BIR
-    # bir_settings = settings['BIR']
-    # run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
+    # # Buzzer
+    # db1_settings = settings['DB1']
+    # run_db1(db1_settings, threads, stop_event, print_lock, alarm_event)
+
+    db1_settings = settings['BB']
+    run_bb(db1_settings, threads, stop_event, print_lock, alarm_event, alarm_clock_event)
+
+    # RGB
+    rgb_settings = settings['BRGB']
+    run_rgb(print_lock, stop_event, threads, rgb_settings, rgb_queue)
+
+    # BIR
+    bir_settings = settings['BIR']
+    run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue)
 
     for thread in threads:
         thread.join()
