@@ -141,14 +141,14 @@ export default function Navbar({
       })
     }
     else {
-      if(time){
+      if (time) {
         Service.setAlarmClock(time).then(response => {
           console.log(response.data);
           setIsModalVisibleClock(false);
         }).catch(error => {
           console.error("Error: ", error)
         })
-      }   
+      }
     }
 
   };
@@ -185,12 +185,13 @@ export default function Navbar({
           ))}
         </Menu>
       </NavbarStyle>
-      <Modal isVisible={isModalVisible} onClose={handleFormCancel}>
-        <SafetySystemForm onSubmit={handlePinEnter} isAlarm={isAlarm}></SafetySystemForm>
-      </Modal>
       <Modal isVisible={isModalVisibleClock} onClose={handleClockCancel}>
         <AlarmClockForm onSubmit={handleAlarmClockEnter} isClockOn={isClockOn}></AlarmClockForm>
       </Modal>
+      <Modal isVisible={isModalVisible} onClose={handleFormCancel}>
+        <SafetySystemForm onSubmit={handlePinEnter} isAlarm={isAlarm}></SafetySystemForm>
+      </Modal>
+
     </>
   );
 }

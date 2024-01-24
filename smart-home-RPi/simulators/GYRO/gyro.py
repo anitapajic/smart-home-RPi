@@ -39,7 +39,7 @@ def simulated_gyro(print_lock, stop_event, settings, publish_event, gyro_callbac
 
             if detect_unusual_activity(gyro_converted, accel_converted, gyro_threshold, accel_threshold):
                 with print_lock:
-                    print("Neobična aktivnost detektovana! Aktiviranje alarma.")
+                    print("Gyroscope: Neobična aktivnost detektovana! Aktiviranje alarma.")
                 alarm_event.set()
 
             time.sleep(7)

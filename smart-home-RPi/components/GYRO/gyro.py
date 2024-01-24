@@ -65,12 +65,14 @@ def gyro_callback(settings, publish_event, gyro, accel):
 def run_gyro(settings, threads, stop_event, print_lock, alarm_event):
     if settings['simulated']:
         gyro_thread = threading.Thread(target=simulated_gyro,
-                                       args=(print_lock, stop_event, settings, publish_event, gyro_callback, alarm_event))
+                                       args=(print_lock, stop_event, settings, publish_event, gyro_callback,
+                                             alarm_event))
         gyro_thread.start()
         threads.append(gyro_thread)
     else:
         from sensors.GYRO.GRG import run_gyro_loop
         gyro_thread = threading.Thread(target=run_gyro_loop,
-                                       args=(print_lock, stop_event, settings, publish_event, gyro_callback, alarm_event))
+                                       args=(print_lock, stop_event, settings, publish_event, gyro_callback,
+                                             alarm_event))
         gyro_thread.start()
         threads.append(gyro_thread)

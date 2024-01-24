@@ -55,19 +55,20 @@ def buzz_callback(settings, publish_event, isOn):
         publish_event.set()
 
 
-def run_db1(settings, threads, stop_event, print_lock, alarm):
+def run_db1(settings, threads, stop_event, print_lock, alarm, alarm_clcok_event):
     pitch = settings.get('pitch', 440)  # Default to 440 if not set
     duration = settings.get('duration', 1000)  # Default to 1 if not set
 
     if settings['simulated']:
         buzzer_thread = threading.Thread(target=listen_for_keypress, args=(stop_event, print_lock, pitch, duration,
                                                                            settings, publish_event, buzz_callback,
-                                                                           alarm))
+                                                                           alarm, alarm_clcok_event))
         buzzer_thread.start()
         threads.append(buzzer_thread)
     else:
         buzzer_pin = settings['pin']
-        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event, buzz_callback, alarm))
+        buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event,
+                                                               buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
 

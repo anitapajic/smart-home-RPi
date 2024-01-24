@@ -60,13 +60,15 @@ def dus_callback(distance, print_lock, settings, publish_event):
 def run_dus(settings, threads, stop_event, print_lock, home, event):
     if settings['simulated']:
         dus_thread = threading.Thread(target=run_dus_simulator,
-                                      args=(2, dus_callback, stop_event, print_lock, settings, publish_event, home, event))
+                                      args=(5, dus_callback, stop_event, print_lock, settings, publish_event, home,
+                                            event))
         dus_thread.start()
         threads.append(dus_thread)
     else:
         from sensors.DUS.DUS import run_dus_loop
         dus_thread = threading.Thread(target=run_dus_loop,
-                                      args=(2, dus_callback, stop_event, print_lock, settings, publish_event, home, event))
+                                      args=(5, dus_callback, stop_event, print_lock, settings, publish_event, home,
+                                            event))
         dus_thread.start()
         threads.append(dus_thread)
 

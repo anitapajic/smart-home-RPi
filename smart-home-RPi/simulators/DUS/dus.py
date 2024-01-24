@@ -4,7 +4,6 @@ import random
 
 def generate_values():
     distance = random.randint(0, 200)
-    new_distance = distance + random.randint(-10, 10)
 
     while True:
         distance = distance + random.randint(-30, 30)
@@ -33,3 +32,4 @@ def run_dus_simulator(delay, callback, stop_event, print_lock, settings, publish
         event.clear()
         if stop_event.is_set():
             break
+        time.sleep(delay)
