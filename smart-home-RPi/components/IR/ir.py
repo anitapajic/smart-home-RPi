@@ -61,7 +61,7 @@ def run_BIR(bir_settings, threads, stop_event, print_lock, rgb_queue=None):
         threads.append(rgb_thread)
     else:
         from sensors.IR.BIR import bir_loop
-        rgb_thread = threading.Thread(target=bir_loop, args=(threads, print_lock, stop_event, bir_settings, publish_event,
-                                                             bir_callback, rgb_queue))
+        rgb_thread = threading.Thread(target=bir_loop, args=(threads, print_lock, stop_event, bir_settings,
+                                                             publish_event, bir_callback, rgb_queue))
         rgb_thread.start()
         threads.append(rgb_thread)

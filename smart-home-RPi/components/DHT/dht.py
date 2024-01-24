@@ -76,13 +76,12 @@ def dht_callback(humidity, temperature, code, print_lock, settings, publish_even
 def run_dht(settings, threads, stop_event, print_lock, queue=None):
     if settings['simulated']:
         dht_thread = threading.Thread(target=run_dht_simulator,
-                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event, queue))
+                                      args=(5, dht_callback, stop_event, print_lock, settings, publish_event, queue))
         dht_thread.start()
         threads.append(dht_thread)
     else:
         from sensors.DHT.DHT import run_dht_loop
         dht_thread = threading.Thread(target=run_dht_loop,
-                                       args=(2, dht_callback, stop_event, print_lock, settings, publish_event, queue))
+                                      args=(5, dht_callback, stop_event, print_lock, settings, publish_event, queue))
         dht_thread.start()
         threads.append(dht_thread)
-

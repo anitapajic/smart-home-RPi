@@ -39,7 +39,7 @@ class DS(object):
             self.state = False
             self.time = 11703882722
 
-def run_ds_loop(callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home):
+def run_ds_loop(callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off):
     # Initialize the door light and button
     GPIO.setmode(GPIO.BCM)
     ds = DS(settings['pin'])

@@ -6,8 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="aaf637a7-620c-426c-ad7e-8a8252cf4fba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/B4SD/b4sd.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/B4SD/b4sd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/BUZZ/buzz.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/BUZZ/buzz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/DHT/dht.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DHT/dht.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/DUS/dus.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/DUS/dus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/GYRO/gyro.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/GYRO/gyro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/IR/ir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/IR/ir.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/PIR/pir.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/broker-data/mosquitto.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUTTON/DS.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUTTON/DS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/BUZZ/BB.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/BUZZ/BB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/PIR/DPIR1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sensors/RGB/BRGB.py" beforeDir="false" afterPath="$PROJECT_DIR$/sensors/RGB/BRGB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/B4SD/b4sd.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/B4SD/b4sd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/BUTTON/ds.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/BUTTON/ds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/DUS/dus.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/DUS/dus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/GYRO/gyro.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/GYRO/gyro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/IR/ir.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/IR/ir.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/MS/ms.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/MS/ms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulators/PIR/pir.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulators/PIR/pir.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +155,7 @@
       <workItem from="1705093815658" duration="17000" />
       <workItem from="1705312476572" duration="2898000" />
       <workItem from="1706036180043" duration="8359000" />
-      <workItem from="1706126274993" duration="2555000" />
+      <workItem from="1706126274993" duration="7742000" />
     </task>
     <servers />
   </component>
@@ -156,7 +174,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1706128822592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/smart_home_RPi$main.coverage" NAME="main Coverage Results" MODIFIED="1706138573693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/smart_home_RPi$main_akt.coverage" NAME="main-akt Coverage Results" MODIFIED="1701894008010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

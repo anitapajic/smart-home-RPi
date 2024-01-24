@@ -16,7 +16,8 @@ def toggle_door_sensor(ds, ds_callback, print_lock, settings, publish_event, ala
     ds_callback(ds.state, print_lock, settings, publish_event)
 
 
-def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home, switch_off):
+def run_ds_simulator(ds_callback, stop_event, print_lock, settings, publish_event, alarm_ds, switch, ds_event, home,
+                     switch_off):
     ds = DS(settings['pin'])
     while True:
         switch.wait()

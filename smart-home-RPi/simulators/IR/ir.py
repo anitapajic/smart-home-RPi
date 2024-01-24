@@ -13,4 +13,4 @@ def simulated_ir(print_lock, stop_event, bir_settings, publish_event, ir_callbac
         ir_callback(bir_settings, publish_event, button)
         with print_lock:
             print("PRITISNUTO DUGME: ", button)
-        time.sleep(1)
+        time.sleep(5)

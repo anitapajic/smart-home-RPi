@@ -85,6 +85,7 @@ def determine_color(buttonName):
     else:
         return None
 
+
 button_to_color_name = {
     "1": "red",
     "2": "green",
@@ -93,7 +94,6 @@ button_to_color_name = {
     "5": "white",
     "6": "purple",
     "7": "lightBlue",
-    # Dodajte ostale taster-boja mapiranja
 }
 
 current_color_index = 0

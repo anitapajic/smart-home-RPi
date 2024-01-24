@@ -68,7 +68,7 @@ def run_db1(settings, threads, stop_event, print_lock, alarm, alarm_clcok_event)
     else:
         buzzer_pin = settings['pin']
         buzzer_thread = threading.Thread(target=db_loop, args=(buzzer_pin, 440, 1, settings, publish_event,
-                                                               buzz_callback, alarm, alarm_clcok_event))
+                                                               buzz_callback, alarm))
         buzzer_thread.start()
         threads.append(buzzer_thread)
 
